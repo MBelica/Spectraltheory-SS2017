@@ -1,4 +1,4 @@
-Funktionalanalysis
+Spectraltheory
 ===========
 Dieses Skript zur Vorlesung “Spectraltheory” am KIT bei
 Herrn Prof. Dr. Tobias Lamm (SS 2017) wurde von Studenten erstellt, es ist somit 
