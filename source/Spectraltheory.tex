@@ -22,7 +22,7 @@
 \usetikzlibrary{calc}	
 \usetikzlibrary{matrix}	
 
-% Language Setup (Deutsch)
+% Language Setup (English)
 \usepackage[utf8]{inputenc} 
 \usepackage[T1]{fontenc} 
 \usepackage[english]{babel}
@@ -41,30 +41,31 @@
   \renewcommand{\labelenumii}{(\roman{enumii})}
   % Zeileneinrückung am Anfang des Absatzes
   \setlength{\parindent}{0pt} 
-  % Verweise auf Enumerate, z.B.: 3.2 a)
-  \setlist[enumerate,1]{ref={\thesatz ~ \alph*)}}
   % Für das Proof-Environment: 'Beweis:' anstatt 'Beweis.'
   \xpatchcmd{\proof}{\@addpunct{.}}{\@addpunct{:}}{}{} 
   % Nummerierung der Bilder, z.B.: Abbildung 4.1
   \@ifundefined{thechapter}{}{\def\thefigure{\thechapter.\arabic{figure}}} 
   % Chapter-Nummerierung beginnen bei (0):
   \setcounter{chapter}{0}
+  % Chapter-Nummerierung
+  \renewcommand\thechapter{\Roman{chapter}}
 \makeatother%
 
-% Meta Setup (Für Titelblatt und Metadaten im PDF)
+% Meta Setup 
 \title{Spectraltheory}
 \author{Prof. Dr. Tobias Lamm}
 \date{Sommersemester 2017}
 \publishers{Karlsruher Institut für Technologie}
 
-%% Math. Definitionen
+%% Math. Definitiones
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\Z}{\mathbb{Z}}
+\newcommand{\DO}[1]{\mathcal{D}\left( {#1} \right)}
+\newcommand{\RO}[1]{\mathcal{R}\left( {#1} \right)}
 
-%% Theorems (unnamedtheorem = Theorem ohne Namen)
 \newtheoremstyle{named}{}{}{\normalfont}{}{\bfseries}{:}{0.25em}{#2 \thmnote{#3}}
 \newtheoremstyle{nnamed}{}{}{\normalfont}{}{\bfseries}{:}{0.25em}{\thmnote{#3}}
 \newtheoremstyle{itshape}{}{}{\itshape}{}{\bfseries}{:}{ }{}
@@ -77,45 +78,23 @@
 \newtheorem*{unnamedtheorem*}{Theorem} 
 
 \theoremstyle{itshape}
-\newtheorem{satz}[unnamedtheorem]{Satz} 
-\newtheorem*{definition}{Definition}
-\newtheorem{hilfssatz}[unnamedtheorem]{Hilfssatz}
-\newtheorem*{hilfssatz*}{Hilfssatz}
+\newtheorem{definition}[unnamedtheorem]{Definition}
 
 \theoremstyle{normal}
-\newtheorem{beispiel}[unnamedtheorem]{Beispiel}
-\newtheorem{folgerung}[unnamedtheorem]{Folgerung}
-%\newtheorem{hilfssatz}[unnamedtheorem]{Hilfssatz}
-\newtheorem{anwendung}[unnamedtheorem]{Anwendung}
-\newtheorem{anwendungen}[unnamedtheorem]{Anwendungen}
-\newtheorem*{anwendung*}{Anwendung}
-\newtheorem*{beispiel*}{Beispiel}
-\newtheorem*{beispiele}{Beispiele}
-\newtheorem*{bemerkung}{Bemerkung} 
-\newtheorem*{bemerkungen}{Bemerkungen}
-\newtheorem*{bezeichnung}{Bezeichnung}
-\newtheorem*{eigenschaften}{Eigenschaften}
-\newtheorem*{folgerung*}{Folgerung}
-\newtheorem*{folgerungen}{Folgerungen}
-%\newtheorem*{hilfssatz*}{Hilfssatz}
-\newtheorem*{regeln}{Regeln}
-\newtheorem*{motivation}{Motivation}
-\newtheorem*{erinnerung}{Erinnerung}
-\newtheorem*{schreibweise}{Schreibweise}
-\newtheorem*{schreibweisen}{Schreibweisen}
-\newtheorem*{uebung}{Übung}
-\newtheorem*{vereinbarung}{Vereinbarung}
+\newtheorem*{recall}{Recall}
+\newtheorem*{example}{Example}
 
 %% Template
 \makeatletter%
 \DeclareUnicodeCharacter{00A0}{ } \pgfplotsset{compat=1.7} \hypersetup{colorlinks,breaklinks, urlcolor=linkcolor, linkcolor=linkcolor, pdftitle=\@title, pdfauthor=\@author, pdfsubject=\@title, pdfcreator=\@publishers}\DeclareOption*{\PassOptionsToClass{\CurrentOption}{report}} \ProcessOptions \def\baselinestretch{\mystretch} \setlength{\oddsidemargin}{0.125in} \setlength{\evensidemargin}{0.125in} \setlength{\topmargin}{0.5in} \setlength{\textwidth}{6.25in} \setlength{\textheight}{8in} \addtolength{\topmargin}{-\headheight} \addtolength{\topmargin}{-\headsep} \def\pulldownheader{ \addtolength{\topmargin}{\headheight} \addtolength{\topmargin}{\headsep} \addtolength{\textheight}{-\headheight} \addtolength{\textheight}{-\headsep} } \def\pullupfooter{ \addtolength{\textheight}{-\footskip} } \def\ps@headings{\let\@mkboth\markboth \def\@oddfoot{} \def\@evenfoot{} \def\@oddhead{\hbox {}\sl \rightmark \hfil \rm\thepage} \def\chaptermark##1{\markright {\uppercase{\ifnum \c@secnumdepth >\m@ne \@chapapp\ \thechapter. \ \fi ##1}}} \pulldownheader } \def\ps@myheadings{\let\@mkboth\@gobbletwo \def\@oddfoot{} \def\@evenfoot{} \def\sectionmark##1{} \def\subsectionmark##1{}  \def\@evenhead{\rm \thepage\hfil\sl\leftmark\hbox {}} \def\@oddhead{\hbox{}\sl\rightmark \hfil \rm\thepage} \pulldownheader }	\def\chapter{\cleardoublepage  \thispagestyle{plain} \global\@topnum\z@ \@afterindentfalse \secdef\@chapter\@schapter} \def\@makeschapterhead#1{ {\parindent \z@ \raggedright \normalfont \interlinepenalty\@M \Huge \bfseries  #1\par\nobreak \vskip 40\p@ }} \newcommand{\indexsection}{chapter} \patchcmd{\@makechapterhead}{\vspace*{50\p@}}{}{}{}\def\Xint#1{\mathchoice
-    {\XXint\displaystyle\textstyle{#1}} {\XXint\textstyle\scriptstyle{#1}} {\XXint\scriptstyle\scriptscriptstyle{#1}} {\XXint\scriptscriptstyle\scriptscriptstyle{#1}} \!\int} \def\XXint#1#2#3{{\setbox0=\hbox{$#1{#2#3}{\int}$} \vcenter{\hbox{$#2#3$}}\kern-.5\wd0}} \def\dashint{\Xint-} \def\Yint#1{\mathchoice {\YYint\displaystyle\textstyle{#1}} {\YYYint\textstyle\scriptscriptstyle{#1}} {}{} \!\int} \def\YYint#1#2#3{{\setbox0=\hbox{$#1{#2#3}{\int}$} \lower1ex\hbox{$#2#3$}\kern-.46\wd0}} \def\YYYint#1#2#3{{\setbox0=\hbox{$#1{#2#3}{\int}$}  \lower0.35ex\hbox{$#2#3$}\kern-.48\wd0}} \def\lowdashint{\Yint-} \def\Zint#1{\mathchoice {\ZZint\displaystyle\textstyle{#1}}{\ZZZint\textstyle\scriptscriptstyle{#1}} {}{} \!\int} \def\ZZint#1#2#3{{\setbox0=\hbox{$#1{#2#3}{\int}$}\raise1.15ex\hbox{$#2#3$}\kern-.57\wd0}} \def\ZZZint#1#2#3{{\setbox0=\hbox{$#1{#2#3}{\int}$} \raise0.85ex\hbox{$#2#3$}\kern-.53\wd0}} \def\highdashint{\Zint-} \DeclareRobustCommand*{\onlyattoc}[1]{} \newcommand*{\activateonlyattoc}{ \DeclareRobustCommand*{\onlyattoc}[1]{##1} } \AtBeginDocument{\addtocontents{toc} {\protect\activateonlyattoc}} 
+    {\XXint\displaystyle\textstyle{#1}} {\XXint\textstyle\scriptstyle{#1}} {\XXint\scriptstyle\scriptscriptstyle{#1}} {\XXint\scriptscriptstyle\scriptscriptstyle{#1}} \!\int} \def\XXint#1#2#3{{\setbox0=\hbox{$#1{#2#3}{\int}$} \vcenter{\hbox{$#2#3$}}\kern-.5\wd0}} \def\dashint{\Xint-} \def\Yint#1{\mathchoice {\YYint\displaystyle\textstyle{#1}} {\YYYint\textstyle\scriptscriptstyle{#1}} {}{} \!\int} \def\YYint#1#2#3{{\setbox0=\hbox{$#1{#2#3}{\int}$} \lower1ex\hbox{$#2#3$}\kern-.46\wd0}} \def\YYYint#1#2#3{{\setbox0=\hbox{$#1{#2#3}{\int}$}  \lower0.35ex\hbox{$#2#3$}\kern-.48\wd0}} \def\lowdashint{\Yint-} \def\Zint#1{\mathchoice {\ZZint\displaystyle\textstyle{#1}}{\ZZZint\textstyle\scriptscriptstyle{#1}} {}{} \!\int} \def\ZZint#1#2#3{{\setbox0=\hbox{$#1{#2#3}{\int}$}\raise1.15ex\hbox{$#2#3$}\kern-.57\wd0}} \def\ZZZint#1#2#3{{\setbox0=\hbox{$#1{#2#3}{\int}$} \raise0.85ex\hbox{$#2#3$}\kern-.53\wd0}} \def\highdashint{\Zint-} \DeclareRobustCommand*{\onlyattoc}[1]{} \newcommand*{\activateonlyattoc}{ \DeclareRobustCommand*{\onlyattoc}[1]{##1} } \AtBeginDocument{\addtocontents{toc} {\protect\activateonlyattoc}} \newcommand{\RightArrow}{\xRightarrow[]{ ~ ~ }} \newcommand{\LeftArrow}{\xLeftarrow[]{ ~ ~ }} \newcommand{\rightArrow}{\xrightarrow[]{ ~ ~ }} \newcommand{\leftArrow}{\xleftarrow[]{ ~ ~ }}
 	% Titlepage
 	\def\maketitle{ \begin{titlepage} 
 			~\vspace{3cm} 
 		\begin{center} {\Huge \@title} \end{center} 
 	 		\vspace*{1cm} 
 	 	\begin{center} {\large \@author} \end{center} 
+	 	\vspace*{-0.5cm}
 	 	\begin{center} \@date \end{center} 
 	 		\vspace*{7cm} 
 	 	\begin{center} \@publishers \end{center} 
@@ -123,7 +102,7 @@
 	\end{titlepage} }
 \makeatother%
 
-% Indexdatei erstellen
+% Create Index
 \makeindex 
 
 \begin{document}
@@ -134,10 +113,73 @@
 	\thispagestyle{empty}
 \end{titlepage}
 
-% Skript - Anfang 			
+% Table of Contents
+\tableofcontents
+\thispagestyle{empty}
+
+% Lecture Notes - Start 			
 \pagenumbering{arabic}
+
+\chapter{Unbounded operators, adjoint and self-adjoint operators}
+
+Let $H$ be a separable Hilbert space, $\langle \cdot, \cdot \rangle$ denote the scalar product on $H$. ~\bigskip
+
+A linear operator $T$ in $H$ is a linear map $u \mapsto Tu$ defined on a subspace $\DO{T}$ of $H$, and we call $\DO{T}$ the domain of $T$. ~\smallskip
+
+For $T \colon \DO{T} \rightarrow H$ we denote the range of $T$ with
+$$ \RO{T} \coloneqq \operatorname{Image}\left( T \right). $$
+
+\index{bounded}
+We say that $T$ is \textbf{bounded} if it is continuous from $\DO{T}$ into $H$, with respect to the topology induced by $H$. ~\smallskip
+
+If $\DO{T} = H$ we recall the definition of bounded operators from the \href{https://github.com/MBelica/Funktionalanalysis-WS2015}{functional analysis} course. ~\bigskip
+
+\index{dense}
+From now on, if $\DO{T} \neq H$ we will assume that $\DO{T}$ is \textbf{dense} in $H$, i.e. $\overline{\DO{T}} = H$. In this case, if $T$ is bounded then $T$ has a unique continuous extension to all of $H$.
+$$ \RightArrow T \text{ bounded is ...} $$ % todo Was steht hier?
+
+\index{closed}
+\begin{recall}
+	An operator is called \textbf{closed} if the graph 
+	$$ G(T) \coloneqq \left\{ (x, y) \in H \times H \colon x \in \DO{T}, y = Tx \right\} $$
+	is closed in $H \times H$.
+\end{recall}
+
+\newpage
+
+\begin{definition} \label{i.1:def}
+	Let $T \colon \DO{T} \rightarrow H$ be a (linear) operator with $\DO{T}$ dense in $H$. Then $T$ is called \textbf{closed} if the conditions
 	
+	$$ 
+		\begin{rcases}
+			u_n \in \DO{T} \\
+			u_n \rightarrow u \text{ in } H \\
+			T u_n \rightarrow v \text{ in } H
+		\end{rcases} \RightArrow u \in \DO{T}, v = Tu
+	$$
+	hold.
+\end{definition}
+
+\begin{example} ~\
+	\begin{enumerate}
+		\item Let $T_0 = - \Delta$, $H = \ell^2(\R^n)$ and $\DO{T_{0}} = C_c^\infty(\R^n)$ dense in $H$. ~\\
+			Take $u \in W^{2,2}(\R^n) \setminus C_c^{\infty}(\R^n)$
+			$$ \xRightarrow[]{\text{densly}} \exists (u_n)_{n \in \N} \in C_c^{\infty}(\R^n) \colon ~ u_n \rightarrow u \text{ in } W^{2,2}(\R^n) $$
+			$\left( u_n, -\Delta u_n \right) \in G(T_0)$ converges in $\ell^2 \times L^2$ to $(u, -\Delta u) \notin G(T_0)$.
+		\item Let $T_1 = - \Delta$, $\DO{T_1} = W^{2,2}(\R^n)$ and $H = L^2(\R^n)$. For $u_n \in \DO{T_1}$ with 
+			$$ u_n \rightarrow u \text{ in } H \text{ and } \left( - \Delta u_n \right) \rightarrow u \text{ in } L^2 $$
+			follows that $- \Delta u = v \in L^2(\R^n)$ weakly, i.e. $\forall \varphi \in C_c^{\infty}(\R^n)$:
+			$$ \int_{\R^n} v \varphi \leftArrow \int_{\R^n} \left( - \Delta u_n \right) \varphi = \int_{\R^n} u_n \left( - \Delta \varphi \right) \rightArrow \int_{\R^n} u \left( - \Delta \varphi \right). $$
+	\end{enumerate}
+\end{example}
 
 
-% Skript - Ende 			
+% Lecture Notes - End 			
+\appendix 
+
+% Index									
+\renewcommand{\indexname}{Stichwortverzeichnis}
+\printindex
+
+
 \end{document}
