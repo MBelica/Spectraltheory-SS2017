@@ -11,6 +11,7 @@
 \usepackage{csquotes}
 \usepackage{enumitem}
 \usepackage{float}
+\usepackage{bbding}
 \usepackage{hyperref}
 \usepackage{ulem}
 \usepackage{lmodern}
@@ -78,11 +79,16 @@
 \newtheorem*{unnamedtheorem*}{Theorem} 
 
 \theoremstyle{itshape}
-\newtheorem{definition}[unnamedtheorem]{Definition}
+\newtheorem{definition}{Definition}  \counterwithin{definition}{chapter}
+\newtheorem{theorem}{Theorem}  \counterwithin{theorem}{chapter}
+\newtheorem{lemma}{Lemma}  \counterwithin{lemma}{chapter}
 
 \theoremstyle{normal}
 \newtheorem*{recall}{Recall}
 \newtheorem*{example}{Example}
+\newtheorem*{remark}{Remark}
+\newtheorem*{satz}{Satz}
+\newtheorem*{bemerkung}{Bemerkung}
 
 %% Template
 \makeatletter%
@@ -120,62 +126,429 @@
 % Lecture Notes - Start 			
 \pagenumbering{arabic}
 
-\chapter{Unbounded operators, adjoint and self-adjoint operators}
+\chapter{Unbounded, adjoint and self-adjoint operators}
 
-Let $H$ be a separable Hilbert space, $\langle \cdot, \cdot \rangle$ denote the scalar product on $H$. ~\bigskip
 
-A linear operator $T$ in $H$ is a linear map $u \mapsto Tu$ defined on a subspace $\DO{T}$ of $H$, and we call $\DO{T}$ the domain of $T$. ~\smallskip
+Let $H$ be a separable Hilbert space, i.e. a real or complex inner product space that is also a complete metric space with respect to the distance function induced by the inner product $\langle \cdot, \cdot \rangle$ on $H$. ~\bigskip
 
-For $T \colon \DO{T} \rightarrow H$ we denote the range of $T$ with
+\index{domain} \index{range}
+A linear operator $T$ in $H$ is a linear map 
+	$$ u \mapsto Tu $$
+defined on a subspace $\DO{T}$ of $H$, and we call $\DO{T}$ the \textbf{domain} of $T$. For $T \colon \DO{T} \rightarrow H$ we denote the \textbf{range} of $T$ with
 $$ \RO{T} \coloneqq \operatorname{Image}\left( T \right). $$
 
-\index{bounded}
-We say that $T$ is \textbf{bounded} if it is continuous from $\DO{T}$ into $H$, with respect to the topology induced by $H$. ~\smallskip
+\index{bounded} \index{Operator!bounded}
+We say that $T$ is \textbf{bounded} if it is continuous from $\DO{T}$ into $H$, with respect to the topology induced by $H$. If $\DO{T} = H$ we recall the definition of bounded operators from the \href{https://github.com/MBelica/Funktionalanalysis-WS2015}{functional analysis} course. From now on, if $\DO{T} \neq H$ we will assume that $\DO{T}$ is \textbf{dense} in $H$, i.e. $\overline{\DO{T}} = H$. \index{dense} ~\bigskip
 
-If $\DO{T} = H$ we recall the definition of bounded operators from the \href{https://github.com/MBelica/Funktionalanalysis-WS2015}{functional analysis} course. ~\bigskip
+ In this case, if $T$ is bounded then $T$ has a unique continuous extension to all of $H$. As this simplifies many considerations some of the following theorems would be trivial, and hence, we won't focus on bounded operators during this lecture.
+\newpage
 
-\index{dense}
-From now on, if $\DO{T} \neq H$ we will assume that $\DO{T}$ is \textbf{dense} in $H$, i.e. $\overline{\DO{T}} = H$. In this case, if $T$ is bounded then $T$ has a unique continuous extension to all of $H$.
-$$ \RightArrow T \text{ bounded is ...} $$ % todo Was steht hier?
-
-\index{closed}
-\begin{recall}
+\begin{recall} \index{closed} \index{Operator!closed} \index{Graph}
 	An operator is called \textbf{closed} if the graph 
-	$$ G(T) \coloneqq \left\{ (x, y) \in H \times H \colon x \in \DO{T}, y = Tx \right\} $$
+	$$ G(T) \coloneqq \big\{ (x, y) \in H \times H ~ \big| ~ x \in \DO{T}, y = Tx \big\} $$
 	is closed in $H \times H$.
 \end{recall}
 
-\newpage
-
+\index{closed} \index{Operator!closed}
 \begin{definition} \label{i.1:def}
-	Let $T \colon \DO{T} \rightarrow H$ be a (linear) operator with $\DO{T}$ dense in $H$. Then $T$ is called \textbf{closed} if the conditions
-	
-	$$ 
-		\begin{rcases}
-			u_n \in \DO{T} \\
-			u_n \rightarrow u \text{ in } H \\
-			T u_n \rightarrow v \text{ in } H
-		\end{rcases} \RightArrow u \in \DO{T}, v = Tu
-	$$
-	hold.
+	Let $T \colon \DO{T} \rightarrow H$ be a (linear) operator with $\DO{T}$ dense in $H$. Then $T$ is called \textbf{closed} if for all 
+		$$ u_n \in \DO{T}, ~ u_n \rightarrow u \in H \text{ and } T u_n \rightarrow v \in H $$
+	follows that
+		$$ u \in \DO{T}, ~ v = T u $$
+	holds.
 \end{definition}
 
 \begin{example} ~\
 	\begin{enumerate}
-		\item Let $T_0 = - \Delta$, $H = \ell^2(\R^n)$ and $\DO{T_{0}} = C_c^\infty(\R^n)$ dense in $H$. ~\\
-			Take $u \in W^{2,2}(\R^n) \setminus C_c^{\infty}(\R^n)$
-			$$ \xRightarrow[]{\text{densly}} \exists (u_n)_{n \in \N} \in C_c^{\infty}(\R^n) \colon ~ u_n \rightarrow u \text{ in } W^{2,2}(\R^n) $$
-			$\left( u_n, -\Delta u_n \right) \in G(T_0)$ converges in $\ell^2 \times L^2$ to $(u, -\Delta u) \notin G(T_0)$.
-		\item Let $T_1 = - \Delta$, $\DO{T_1} = W^{2,2}(\R^n)$ and $H = L^2(\R^n)$. For $u_n \in \DO{T_1}$ with 
-			$$ u_n \rightarrow u \text{ in } H \text{ and } \left( - \Delta u_n \right) \rightarrow u \text{ in } L^2 $$
+		\item Let $H = L^2(\R^n)$, then $\DO{T_{0}} = C_c^\infty(\R^n)$ is dense in $H$. Define the operator
+			$$ T_0 = - \Delta,  $$
+			and take $u \in W^{2,2}(\R^n) \setminus C_c^{\infty}(\R^n)$. Due to the density:
+			$$ \exists ~(u_n)_{n \in \N} \subseteq C_c^{\infty}(\R^n) \colon ~ u_n \rightarrow u \text{ in } W^{2,2}(\R^n). $$
+			As a result, $\left( u_n, -\Delta u_n \right) \in G(T_0)$ converges in $L^2 \times L^2$ to $(u, -\Delta u) \notin G(T_0)$.
+		\item Let $T_1 = - \Delta$, $\DO{T_1} = W^{2,2}(\R^n)$ and $H = L^2(\R^n)$. For $(u_n)_{n \in \N} \subseteq \DO{T_1}$ with 
+			$$ u_n \rightarrow u \in H \text{ and } \left( - \Delta u_n \right) \rightarrow u \in L^2 $$
 			follows that $- \Delta u = v \in L^2(\R^n)$ weakly, i.e. $\forall \varphi \in C_c^{\infty}(\R^n)$:
 			$$ \int_{\R^n} v \varphi \leftArrow \int_{\R^n} \left( - \Delta u_n \right) \varphi = \int_{\R^n} u_n \left( - \Delta \varphi \right) \rightArrow \int_{\R^n} u \left( - \Delta \varphi \right). $$
+			$\xRightarrow[]{PDE} u \in W^{2,2}(\R^n) = \DO{T_1} \Rightarrow T_1$ is closed.
 	\end{enumerate}
 \end{example}
 
+\index{closable} \index{Operator!closable}
+\begin{definition}
+	An operator $T$ is called \textbf{closable} $\iff \overline{G(T)}$ is a graph.
+\end{definition}
 
-% Lecture Notes - End 			
-\appendix 
+\index{closure} \index{Operator!closure of}
+\begin{remark}
+	We call $\overline{T}$ the \textbf{closure} of $T$, and in such case we have 
+	$$ \DO{\overline{T}} \coloneqq \big\{ x \in H ~ \big| ~ \exists ~ y \colon (x, y) \in \overline{G(R)} \big\} $$	
+	For any $x \in \DO{\overline{T}}$ the assumption that $\overline{G(T)}$ is a graph implies that $y$ is unique and hence
+	$$ \Rightarrow G(\overline{T}) = \overline{G(T)}, ~\overline{T} x \coloneqq y $$
+	Equivalently, $\DO{\overline{T}}$ is the set of all $x \in H$ such that there exists a sequence $x_n \in \DO{T}$ with $x_n \rightarrow x$ in $H$ and $T x_n$ is a cauchy sequence. For such $x$ we define
+	$$ \overline{Tx} \coloneqq \lim_{n \rightarrow \infty} T x_n $$
+\end{remark}
+
+\begin{example}
+	Let $T_0 \coloneqq - \Delta$, $\DO{T_0} = C_c^\infty(\R^n)$ is closable with $\overline{T_0} = T_1$.
+	 
+	\begin{proof}
+		Let $u \in L^2(\R^n)$ such that there exists $(u_n)_{n \in \N} \in C_c^\infty(\R^n)$ with $u_n \rightarrow u$ in $L^2$ and $-\Delta u_n \rightarrow u$ in $L^2$, as above: 
+		$$ -\Delta u = v \in L^2 $$
+		For a given $u$ the function $u$ is unique $\Rightarrow T_0$ is closable. Let $\overline{T_0}$ be the closure with domain $\DO{\overline{T_0}}$ and $u \in \DO{T_0}$
+		$$ \Rightarrow \Delta u \in L^2 \Rightarrow u \in W^{2,2}(\R^n) = \DO{T_1} \Rightarrow \DO{\overline{T_0}} \subseteq \DO{T_1} $$
+		but $C_c^{\infty}(\R^n)$ is dense in $\DO{T_1} = W_{2,2}(\R^n)$
+		$$ \Rightarrow W^{2,2}(\R^n) \subseteq \DO{\overline{T_0}} \Rightarrow \DO{\overline{T_0}} = \DO{T_1} \Rightarrow T_1 = \overline{T_0}, $$
+		Assumption: 
+		$$ W^{2,2} \not\subseteq \DO{T_0} \Rightarrow \exists u \in W^{2, 2} \setminus D \left( \overline{T_0} \right), ~\exists (u_n)_{n \in \N} \in C^{\infty}_c (\R^n): u_n \rightarrow u \text{ in } W^{2, 2}$$ same argument as in example 1) $\Rightarrow \overline{T_0}$ not closed!
+	\end{proof}	
+\end{example}
+
+\begin{recall}
+	If $T \colon H \rightarrow H$ is bounded then $T^*$ is defined through
+	$$ \langle u , T^* v \rangle = \langle T u , v \rangle, ~ \forall u, v \in H $$	
+	In the ... $u \mapsto \langle T u, v \rangle$ deines a continuous linear map on $H$ ($\in H'$), Riesz' representation theorem then ensures the existence of $T^*$.
+\end{recall}
+
+\begin{definition}
+	If $T$ is an unbounded operator on $H$ with dense domain, we defined 
+		$$ \DO{T^*} \coloneqq \big\{ v \in H \colon \DO{T} \ni u \mapsto \langle T u, v \rangle \text{ can be extended as a linear continuous form on } H \big\} $$
+	Using Riesz representation theorem $\exists! f \in H$:
+		$$ \langle u, f \rangle = \langle T u, v \rangle \forall u \in \DO{T} $$
+	then define $T^* v = f$, where the uniqueness follows from the density of $\DO{T}$ in $H$.
+\end{definition}
+
+\begin{remark}
+	If $\DO{T} = H$ and $T$ is bounded then we recover the \enquote{old} adjoint.
+\end{remark}
+
+\begin{example}
+	$T_0^* = T_1$, 
+	\begin{align*}
+		\DO{T_0^*} & = \big\{ v \in L^2(\R^n) \colon C_c^\infty(\R^n) \ni u \mapsto \langle - \Delta u, v \rangle \text{ can be } \\
+			& ~\hspace{3cm} \text{ extended as a linear continuous form on } L^2(\R^n) \big\} \\
+			& = \big\{ v \in L^2(\R^n) \colon - \Delta v \in L^2(\R^n) \big\} = W^{2,2}(\R^n) = \DO{T_1}
+	\end{align*}
+	Damit ist
+	$$ \langle T_1 u, v \rangle = \langle - \Delta u, v \rangle = \int v \left( - \Delta u \right) = - \int \left( - \Delta v \right) u = \langle u, T_1 v \rangle $$
+\end{example}
+
+\begin{theorem} \label{I.1:thm}
+	$T^*$ is a closed operator.
+	
+	\begin{proof}
+		$v_n \in \DO{T^*}$ such that $v_n \rightarrow v$ in $H$ and $T^* v_n \rightarrow w^*$ in $H$ for $(v, w^*) \in H \times H$. ~\\
+		For all $u \in \DO{T}$ we have
+			$$ \langle Tu, v \rangle = \lim_{n \rightarrow \infty} \langle T u, v_n \rangle = \lim_{n \rightarrow \infty} \langle u, T^* v_n \rangle = \langle u , w^* \rangle $$
+		($H \ni u \mapsto \langle u, w^* \rangle$ is continuous) $\Rightarrow v \in \DO{T^*}$ and $w^* = T^* v$ by definition.
+	\end{proof}
+\end{theorem}
+
+\begin{theorem} \label{I.2:thm}
+	Let $T$ be an operator in $H$ with domain $\DO{T}$. Then
+		$$ G \left( T^* \right) = \left( V \left( \overline{G(T)} \right) \right)^{\perp} $$
+	where $V \colon H \times H \rightarrow H \times H, V(x, y) = (y, -x)$ ($V^2 = - \mathbb{I}$).
+	
+	\begin{proof}
+		Let $u \in \DO{T}, \left(v, w^* \right) \in H \times H$ 
+			$$ \Rightarrow \langle V \left( u, TU \right), \left( v, w^* \right) \rangle_{H \times H} = \langle T u, v \rangle - \langle u, w^* \rangle $$
+		Considering the right-hand side it follows
+		$$ \langle T u, v \rangle - \langle u, w^* \rangle = 0 ~ \forall u \in \DO{T} \iff v \in \DO{T^*} \text{ and } w^* = T^* v \iff \left( v, w^* \right) \in G\left( T^* \right), $$
+		and considering the left-hand side
+		$$ \Rightarrow \langle V \left( u, TU \right), \left( v, w^* \right) \rangle_{H \times H} = 0 ~ \forall u \in \DO{T} \iff \left( v, w^* \right) \in V \left( G(T) \right)^{\perp} $$
+		In general: $U^{\perp} = \overline{U}^{\perp}$
+		$$ \Rightarrow V \left( G(T) \right)^{\perp} = \left( \overline{V\left( G(T) \right)} \right)^{\perp} = \left( V \left( \overline{G(T)} \right) \right)^{\perp} $$
+	\end{proof}
+\end{theorem}
+
+\begin{theorem} \label{I.3:thm}
+	Let $T$ be a closable operator. Then:
+	\begin{enumerate}
+		\item $\DO{T^*}$ is dense in $H$
+		\item $T^{**} \coloneqq \left( T^* \right)^* = \overline{T}$
+	\end{enumerate}
+	
+	\begin{proof} ~\
+		\begin{enumerate}
+			\item Proof through contradiction: $D\left( T^* \right)$ not dense in $H \rightarrow \exists w \neq 0: \langle w, v \rangle = 0 ~\forall v \in \overline{\DO{T^*}}$
+				\begin{align*}
+					& \xRightarrow[]{~~~~} \langle \left( 0, w \right), \left( T^*v, -v \right) \rangle_{H \times H} = 0 ~\forall v \in \DO{T^*} \\
+					& \xRightarrow[]{~~~~} \left( 0, w \right) \perp V \left( G(T^*) \right) \\
+					& \xRightarrow[\ref{I.2:thm}]{\hyperref[I.2:thm]{Thm}} V \left( \overline{G(T)} \right) = G \left( T^* \right)^{\perp} \\
+					& \xRightarrow[]{~~~~} V \left( G(T^*)^{\perp} \right) = \overline{G(T)}
+				\end{align*}
+				For any $M \subseteq H \times H$ we have $V \left( M^{\perp} \right) = V(M)^{\perp}$ since for $(u,v) \in V(M)^{\perp}$, $(x,y) \in M$
+				$$ \langle V(u, v) , (x,y) \rangle_{H \times H} = - \langle (u, v ), V(x,y) \rangle_{H \times h} \Rightarrow V(u, v) \in M^{\perp} \Rightarrow (u, v) \in V\left( M^{\perp} \right) $$
+				$\RightArrow V \left( G \left( T^* \right) \right)^{\perp} = \overline{G(T)} = G \left(\overline{T} \right) \RightArrow (0, w) \in G\left( \overline{T} \right) \RightArrow w = 0$
+			\item $G \left( T^{**} \right) \overset{\hyperref[I.2:thm]{Thm}}{\underset{\ref{I.2:thm}}{=}} V \left( \overline{G \left( T^* \right)} \right)^{\perp} \overset{\hyperref[I.1:thm]{Thm}}{\underset{\ref{I.1:thm}}{=}} V \left( G \left( T^* \right) \right)^{\perp} \overset{(\perp)}{=} G \left( \overline{T} \right) \RightArrow \DO{T^{**}} = \DO{\overline{T}}, T^{**} = \overline{T}$
+		\end{enumerate}
+	\end{proof}
+\end{theorem}
+
+\begin{definition}
+	We say $T \colon \DO{T} \rightarrow H$ is \textbf{symmetric} if and only if
+	$$ \langle Tu, v \rangle = \langle u , Tv \rangle \quad \forall u, v \in \DO{T} $$
+\end{definition}
+
+\begin{example}
+	$T_0 = - \Delta$, $\DO{T_0} = C_c^{\infty}(\R^n)$
+	$$ \int_{\R^n} \left( - \Delta u \right) v = \int_{\R^n} u \left( - \Delta v \right) $$	
+\end{example}
+
+\begin{remark}
+	If $T$ is symmetric $\Rightarrow \DO{T} \subseteq \DO{T^*}$ and
+	$$ T u = T^* u \quad \forall u \in \DO{T} $$
+	$\Rightarrow \left( T^*, \DO{T^*} \right)$ is an extension of $\left( T, \DO{T} \right)$.
+\end{remark}
+
+\begin{lemma} \label{I.1:lmm}
+	A symmetric operator $T$ is closable.
+	
+	\begin{proof}
+		It suffice to show that for $u_n \in \DO{T}$ with $u_n \rightarrow 0$ and $ u_n \rightarrow x \in H$ we have $x = 0$
+		$$ \langle x,  v \rangle \leftarrow \langle T u_n, v \rangle = \langle u_n , T u \rangle \rightarrow \langle 0, T u \rangle = 0 \quad \forall v \in \DO{T}  $$
+		$\Rightarrow x = 0$.
+	\end{proof}
+\end{lemma}
+
+\begin{remark}
+	The proof actually shows that if $\DO{T^*}$ is dense in $H$, then $T$ is closable.	
+\end{remark}
+
+\begin{definition}
+	We call an operator $T$ self-adjoint if 
+		$$ T = T^* \text{ and }  Tu = T^* u \quad \forall u \in \DO{T},  $$ % todo wieso ist diese Forderung nötig?
+	note that the first property implies that $\DO{T} = \DO{T^*}$.
+\end{definition}
+
+\begin{theorem}
+	Every self-adjoint operator is closable.
+	
+	\begin{proof}
+		\hyperref[I.1:lmm]{Lemma I.1}
+	\end{proof}
+\end{theorem}
+
+\begin{theorem}
+	Let $T$ be an invertible self-adjoint operator, then $T^{-1}$ is also self-adjoint.
+	
+	\begin{proof}
+		For $T \colon \DO{T} \rightarrow \RO{T}$ consider
+		\begin{description}
+			\item[~\hspace{0.25em}~Step 1] $\RO{T}$ is dense in $H$. We have to show that $\RO{T}^\perp = \{ 0 \}$. ~\\
+				Let $w \in H$ such that 
+					$$\langle T u, w \rangle = 0 ~\forall u \in \DO{T}$$
+				$\RightArrow w \in \DO{T^*}$ and $T^* w = 0 \xRightarrow[s.a.]{inj.} w = 0$.
+			\item[~\hspace{0.25em}~Step 2] Let $w \colon H \times H \rightarrow H \times H$, $w(x,y) = (y, x)$
+			$$ \RightArrow G\left( T^{-1} \right) = \big\{ \left(x, T^{-1} x\right) \colon x \in \DO{T} \big\} = w\left(G\left(T\right)\right) = \big\{ \left(Ty, y\right) \colon y \in \DO{T} \big\} $$
+			\begin{align*}
+				G\left( T^{-1} \right) & = G \left( \left( T^* \right)^{-1} \right) ~\overset{\hyperref[I.2:thm]{Proof}}{\underset{\hyperref[I.2:thm]{Thm. I.2}}{=}} w \left( V \left( G \left(T \right)^{\perp} \right) \right) \\
+				& = V \left( w \left( G \left( T \right) \right)^{\perp} \right) =  V \left( w \left( G \left( T \right) \right) \right)^{\perp} \\
+				& =  V \left(  G \left( T^{-1} \right) \right)^{\perp} \overset{\hyperref[I.2:thm]{Thm.}}{\underset{\ref{I.2:thm}}{=}} G \left( \left( T^{-1} \right)^* \right)
+			\end{align*}
+			$\Rightarrow T^{-1} = \left( T^{-1} \right)^*$
+		\end{description}
+	\end{proof}
+\end{theorem}
+
+
+\chapter{Representation Theorems}
+
+\begin{theorem}[Riesz]
+	Let $u \mapsto F(u)$ be a linear continuous function on $H$. Then $\exists! w \in H$:
+	$$ F(u) = \langle u, w \rangle \quad \forall u \in H $$
+\end{theorem}
+
+\textbf{Lax-Milgram}: $V$ Hilbertspace, sesquilinear form is defined on $V \times V$, $(u, v) \mapsto \alpha (u, v)$ continuous with
+$$ \left| \alpha (u, v) \right| \leq c \| u \| \|v \| \quad \forall u,v \in V $$
+\textbf{Riesz}: $\exists$ linear map $A \colon V \rightarrow V$:
+$$ \alpha(u, v ) = \langle A u, v \rangle $$
+
+\index{coercive}
+\begin{definition}
+	A bilinear form $a \colon V \times V \rightarrow \R$ is \textbf{$V$-coercive} if there exists $\lambda > 0$ such that
+	$$ a\left( u, u \right) \geq \lambda \| u \|^2 \quad \forall u \in V $$
+\end{definition}
+
+\begin{theorem}
+	Let $a$ be a continuous sesquilinear and $V$-coercive on $V \times V$ then $A$ is an isomorphism.
+	
+	\begin{proof} ~\
+		\begin{description}
+			\item[~\hspace{0.25em}~Step 1:] $A$ is injective:
+				$$ \| fu \| \| u \| \overset{C.S.}{\geq} \left| \langle A u, u \rangle \right| = \left| u(u, u) \right| \geq \lambda \| u \|^2 $$
+				$\Rightarrow \| A u\| \geq \lambda \| u \|$ for all $u \in V$.
+			\item[~\hspace{0.25em}~Step 2:] $A(V)$ is dense in $V$. Let $u \in V$ such that 
+				$$ \langle A u, v \rangle = 0 \quad \forall v \in V $$
+				take $v = u \Rightarrow a(u, u) = \Rightarrow u = 0$. 
+			\item[~\hspace{0.25em}~Step 3:] $\R(A) = A(V)$ is closed. Let $v_n$ be a sequence in $A(V)$ and let $a_n$ be such that
+				$$ A u_n = v_n $$
+				$\xRightarrow[]{(+)} u_n$ is a Cauchy sequence $\Rightarrow u_n \rightarrow u \in V$ und $A u_n \rightarrow A u \Rightarrow v_n \rightarrow A u \in A(V)$
+			\item[~\hspace{0.25em}~Step 4:] $u = A^{-1} v \xRightarrow[]{(+)} \|A^{-1} v \| \leq \lambda^{-1} \| v \| ~\forall v \in V$. 
+		\end{description}
+	\end{proof}
+\end{theorem}
+
+Next we consider two Hilbert spaces $V, H$ with $V \subset H$ (the inclusion is continuous), i.e.
+$$ \exists c < \infty \colon \quad \| u \|_H \leq c \| u \|_V \quad \forall u \in V $$
+and we assume that $V$ is dense in $H$.
+
+\begin{example}
+	$V = W^{1,1}(\R^n)$, $H = L^2(\R^n)$
+ 		$$ \| u \|_L^2 \leq \| u \|_{W^{1,2}} $$	
+ 	There exists a natural injection from $H$ into $V'$. Let $h \in H$ then $V \ni u \mapsto \langle u, h \rangle_H$ is continuous on $V$ $\xRightarrow[\text{\hyperref[II.1:thm]{Thm. II.1}}]{} \exists l_h \in V'$:
+ 		$$ l_h(u) = \langle u, h \rangle_H \quad \forall u \in V $$
+ 	injectivity follows from density of $V$ in $H$. $V \subset H $
+\end{example}
+
+
+% Lecture Notes - End 
+\appendix % todo appendix
+% Exercises - Start 
+
+\chapter{Exercises}
+
+\subsection*{Exercise 1}
+
+\begin{enumerate}
+	\item $H$ separable $\Rightarrow \exists (e_n)_{n \in \N} \subseteq H$ orthonormal basis of $H$.
+		\begin{proof}
+			$H$ separable $\Rightarrow \exists (u_n)_{n \in \N} \subseteq H$: $\overline{ \{ u_n | n \in \N \}} = H$. Define:
+			$$ H_n \coloneqq \operatorname{lin} \{ u_1, \dotsc, u_n \}, ~ \text{ for } n \in \N $$
+			$H_n \subseteq H$ closed subspace of $H$ as $\dim H_n \leq n < \infty$.
+			By Projektionssatz there exists an orthogonal projection $P_n$ on $H_n$. Set
+			$$ g_n \coloneqq u_n - P_{n-1} un \in H_{n} \cap H_{n-1}^{\perp}, N \coloneqq \{ n \in \N | g_n \neq 0 \} $$
+			Now we define 
+			$$ e_n \coloneqq \begin{cases} \frac{g_{n}}{\| g_n \}}, & n \in N \\ 0, & n \notin N \end{cases} $$
+			$\Rightarrow e_n \in H_n \cap H_{n-1}^{\perp}$, $\operatorname{lin}\{. e_1, \dotsc, e_n \} = H_n \Rightarrow (e_n)_{n \in \N}$ is an orthonormal basis of $H$.
+		\end{proof}
+	\item $H = L^2(0, 1)$, $\DO(T) = W^{1,2}(0, 1) \eqqcolon H^{1}(0,1)$, $T f = i f'$.
+		\begin{proof}
+			$T$ abgeschlossen: $(x_n)_{n \in \N} \subseteq \DO{T}$ Cauchyfolge bezüglich $\| \cdot \|_{W^{1,2}}$. $\xRightarrow[\text{vollständig}]{L^2} \exists x, y \in L^2(0,1): x_n \rightarrow x, x_n' \rightarrow y \text{ in } L^{2}(0,1)$
+			$$ \Rightarrow \int_0^1 x \varphi' dt = \lim_{n \rightarrow \infty} \int_0^1 x_n \varphi' dt = - \lim_{n \rightarrow \infty} \int_0^1 x_n'' \varphi dt = - \int_0^1 y \varphi dt ~\forall \varphi \in C_c^{\infty}(0,1) $$
+			$\Rightarrow x \in \DO{T}$, $x' = y$, $T x = i x' \Rightarrow T$ abgeschlossen. ~\\
+			We still have to show that $T$ isn't symmetric:
+			$$ \langle  Tx, y \rangle_{L^2} = \int_0^1 i x' \overline{y} dt \overset{P.I.} {=}[ixy]_0^1 - \int_0^1 i x \overline{y}' dt = \underbrace{[ixy]_0^1}_{\neq 0 \text{ i. g.}} + \langle x, Ty \rangle_{L^2},$$
+			d.h. $T$ is not symmetrich $\Rightarrow t$ nicht self-adjoint. $T$ isn't halb-beschränkt nach unten;: siehe $(iii)$.
+		\end{proof}
+	\item $\DO{T} = W_0^{1,2}(0,1)$, $H = L^{2}(0, 1)$, $Tf = if'$. 
+		\begin{proof}
+			$T$ closed: as in $(ii)$, ~\\
+			$T$ symmetrisch:
+			$$ \langle Tx, y \rangle_{L^2} = \dotsc = \underbrace{[ixy]_0^1}_{= 0} + \langle x, Ty \rangle_{L^2} = \langle x, Ty \rangle ~ \forall x, y \in \DO{T}$$
+			$T$ not self-adjoint:
+			$$ \DO{T^*} = \big\{ y\in L^2(0, 1) \colon x \mapsto \langle Tx, y \rangle_{L^2} \text{ continuous on } \DO{T} \big\} $$
+			Vermutung: $W^{1,2}(0, 10) \subseteq \DO{T^*}$ (even \enquote{=}).
+			Let $x \in \DO{T}, y \in W^{1,2}(0,1)$:
+			$$ \langle Tx, y \rangle_{L^2} = \dotsc = \underbrace{[ixy]_0^1}_{= 0} + \langle x, iy' \rangle_{L^2} = \langle x, iy' \rangle_{L^2}  $$
+			continuous on $\DO{T}$, i.e. $W^{1,2}(0,1) \subseteq \DO{T^*}$, however $W^{1,2}(0, 1) \not\subseteq W_0^{1,2}(0,1)$, i.e. $\DO{T} \neq \DO{T^*} \Rightarrow T \neq T^*$. ~\\
+			$T$ is not halb-beschränkt nach unten: 
+			$$ {\color{gray} \textit{ Consider the comment: } \langle Tx, x \rangle_{L^2} = - 2 \int_0^21 \left( \operatorname{Im} x \right)' \operatorname{Re}x dt \overset{\textit{\enquote{?}}}{\geq}  c \langle x, x \rangle_{L^2} } $$
+			For $f_0 \in W_0^{1,2}(0, 1)$ with $\langle f_0, f_0 \rangle_{L^2} = 1$, $w \in \R$, $f_w(t) \coloneqq e^{iwt} f_0(t) \Rightarrow \langle f_w, f_w \rangle_{L^2} = 1$
+			\begin{align*}
+				f'_w(t) & = iw e^{iwt} f_0(t) + e^{iwt} f_0'(t) \\ 
+						& = iw f_w(t) + e^{iwt} f_0'(t).
+			\end{align*}
+			\begin{align*}
+				\langle T f_w, f_w \rangle & = \int_0^1 \left( - w f_w(t) + i e^{iwt} f_0'(t) \right) e^{-iwt} \overline{f_0(t)} dt \\ 
+					& = \underbrace{\int_0^1 - w |f_0|^2 dt}_{= - w} + \underbrace{ \int_0^1 i f_0'(t) \overline{f_0(t)} dt }_{\langle T f_0, f_0 \rangle_{L^2}} = - w + \underbrace{ \langle T f_0, f_0 \rangle_{L^2}}_{\in \R} \rightarrow \pm \infty 
+			\end{align*}
+			for $w \rightarrow \pm \infty \Rightarrow T$ ist not halb-beschränkt. ~\bigskip
+			In $(iii)$ $T$ has a self-adjoint Erweitunerung $S$:
+			$$ \DO{S} = \big\{ x \in W^{1,2}(0,1) \colon x(0) = x(1) \big\}, ~Sf = if' $$
+		\end{proof}
+\end{enumerate}
+
+\begin{definition}
+	Sei $\Omega \subseteq \C$ offen, $r \colon \Omega \rightarrow X$ eine Funktion. Man definiert
+	\begin{enumerate}
+		\item $r$ ist schwach analytisch $\iff \forall \varphi \in X^* \colon \varphi \circ r$ analytisch auf $\Omega$
+		\item $r$ ist analytisch $\iff \frac{d}{dz} r(z_0) \coloneqq r'(z_0) \coloneqq \lim_{z \rightarrow z_0} \left( z - z_0 \right)^{-1} \left[ r(z) - r(z_0) \right]$ existiert in $X$ $\forall z_0 \in \Omega$ 
+		\item Kurvenintegrale: Sein $\Gamma \coloneqq \big\{ \gamma(t) \colon t \in [a, b] \big\}$ endlich-stückweise glatte Kurve in $\Omega$, $r$ stetig, dann:
+		$$ \int_{\Gamma} r(\lambda) d\lambda \coloneqq \int_a^b r\left( \gamma(t) \right) \cdot \gamma'(t) dt \in X $$
+	\end{enumerate}
+\end{definition}
+
+\begin{satz}[Lemma von Dunford]
+	$r \colon \Omega \rightarrow X$ schwach analytisch $\iff r$ analytisch
+\end{satz}
+
+\begin{satz}[Cuachy's Integralsatz und Formel]
+	Sei $\Omega \subseteq \C$ offen und konvex, $r \colon \Omega \rightarrow X$ analytisch. Dann gilt:
+	\begin{enumerate}
+		\item $\gamma \subseteq \Omega$ stückweise glatt und geschlossen $\Rightarrow \int_{\Gamma} r(\lambda) d \lambda  0$.
+		\item $\forall \lambda_0 \in \Omega$, $a > 0$ mit $\overline{B(\lambda_0, a)} \subseteq \Omega$:
+			$$ r(\lambda) = \frac{1}{2 \pi i} \int_{|\mu - \lambda_0| = a} \frac{1}{\mu - \lambda} r(\mu) d \mu \in X. $$
+	\end{enumerate}	
+	\begin{proof}
+		Sei $x^{*} \in X^*$, dann ist $x^{*} \circ r$ analytisch auf $\Omega$. Nach Integralsatz bzw. -formel aus der Funktionentheorie folgt:
+			$$ 0 = \int_{\Gamma} x^{*}\left(r(\lambda) \right) d \lambda = x^{*} \left( \underbrace{\int_{\Gamma} r(\lambda) d\lambda}_{\eqqcolon x_1} \right), $$
+			$$ x^*\left( r(\lambda) \right) = \frac{1}{2\pi i} \int_{|\mu - \lambda_0|=a} \frac{1}{\mu - \lambda} x^*\left(r(\mu) \right) d\mu = x^* \left( \frac{1}{2 \pi i} \int_{|\mu - \lambda_0| = a} \frac{1}{\mu - \lambda} r(\mu) d \mu \right) $$
+			$$ \iff x^{*} \left( \underbrace{r(\lambda) - \frac{1}{2 \pi i} \int_{\Gamma} \frac{1}{\mu - \lambda} r(\mu) d \mu)}_{\eqqcolon x_2 }  \right)= 0 $$
+			$\Rightarrow x^*(x_1) = 0$, $x^*(x_2) = 0 ~\forall x^* \in X^* \xRightarrow[Banach]{Hahn-} x_1 = 0$, $x_2 = 0$.
+	\end{proof}
+\end{satz}
+
+\subsubsection*{Das Dunford-Kalkül}
+
+\begin{definition}[Kalkül für Polynome]
+	Sei $A \in L(X)$, $p \colon \lambda \mapsto \sum_{k = 0}^{n} a_k \lambda^k$ Polynom, $a_k \in \C$ für $k = 0, \dotsc, n$. Dann definiert man:
+	$$ p(A) = \sum_{k = 0}^{n} a_k A^k \in L(X). $$
+	$\mathcal{P}$ Vektorraum aller Polynome.	
+\end{definition}
+
+\begin{satz}[Eigenschaften]
+	$p_1, p_2, p \in \mathcal{P}$, $p(\lambda) = \sum_{k=0}^{n} a_k \lambda^k$, $A \in L(X)$, $\alpha, \beta \in \C$. Dann gilt:
+	\begin{enumerate}[label=\upshape(\arabic*\upshape)]
+		\item Linearität: $\left( \alpha p_1 + \beta p_2 \right) (A) = \alpha p_1(A) + \beta p_2(A)$.
+		\item Multiplikativität:: $\left( p_1 \cdot p_2 \right) (A) = p_1(A) p_2(A) = p_2(A) \cdot p_1(A)$.
+		\item Beschränktheit: $\|p(A) \|_{L(X)} \leq \sum_{k=0}^{n} |a_k| \| A \|^k_{L(X)}$.
+		\item Spektrale Abbildungseigenschaft: $\sigma \left( p(A) \right) = p \left( \sigma(A) \right)$.
+	\end{enumerate}
+	
+	\begin{proof} ~\
+		\begin{enumerate}[label=\upshape(\arabic*\upshape)]
+			\item - (3): klar.  \setcounter{enumi}{3}
+			\item \enquote{$\supseteq$}: Sei $\mu \in \sigma(A)$, dann hat das Polynom $\lambda \mapsto p(\mu)- p(\lambda) \in \mathcal{P}$ eine Nullstelle in $\lambda = \mu$. Somit folgt:
+					$$ p(\mu) - p(\lambda) = \left( \mu - \lambda \right) q(\lambda), $$
+				für ein $q \in \mathcal{P}$ für alle $\lambda \in \C$.
+					$$ \xRightarrow[\lambda = A]{(1), (2)} p(\mu) - p(A) = \left( \mu - A \right) q(A) = q(A) \left( \mu - A \right) $$
+				Da $\mu \in \sigma(A)$ ist $\mu - A$ nicht injektiv oder nicht surjektiv.
+					$$ \Rightarrow p(\mu) - p(A) $$
+				kann nicht injektiv oder nicht surjektiv sein $\Rightarrow p(\mu) \subseteq \sigma \left( p(A) \right)$. \bigskip
+				\enquote{$\subseteq$}: Sei $\mu \in \sigma \left( p (A) \right)$.Wähle Nullstellen $\lambda_1, \dotsc, \lambda_m \in \C$ von $\lambda \mapsto \mu - p(\mu)$, d.h.
+				$$ \mu - p(\lambda) = a \left( \lambda - \lambda_1 \right) \cdot \dotsc \cdot \left( \lambda - \lambda_m \right), $$
+				$a \neq 0 \xRightarrow[\lambda ) A]{(1), (2)} \mu - p(A) = a \left(A - \lambda_1 \right) \cdot \dotsc \cdot \left(A - \lambda_m \right)$. Angenommen: $\lambda_1, \dotsc, \lambda_m \notin \sigma(A)$
+				$$ \Rightarrow L(X) \ni \left(A - \lambda_m \right)^{-1} \cdot \dotsc \cdot \left( A - \lambda_1 \right)^{-1} a^{-1} = \left( \mu - p(A) \right)^{-1}, $$
+				was einen Widerspruch zu $\mu \in \sigma \left( p(A) \right)$ darstellt $\Rightarrow \exists j_0 \in \{1, \dotsc, m \}$: $\lambda_{j_0} \in \sigma(A)$.
+				$$ \mu - p(\lambda_{j_0}) = 0 \iff \mu = p(\lambda_{j_0}), $$
+				d.h. $\mu \in p \left( \sigma(A) \right)$.
+		\end{enumerate}
+	\end{proof}
+\end{satz}
+
+\begin{bemerkung} ~\\
+	\begin{figure*}[h!] \centering
+		\begin{tabular}{ccc}
+  			~ & \textbf{Kalkül für Polynome} & ~ \\
+  			\hline
+  			Verallgemeinerte & & Approximiere: \\
+  			Polynome = Potenzreihen & & Satz von Weierstraß \\
+  			& ~ & $\overline{\mathcal{P}}^{\|\cdot\|_{C^{0}[0,1]}} = C^{0}[0,1]$ \\
+  			$A \mapsto \sum_{k =0}^{\infty} a_k A^k$ & ~ & ~ \\
+ 			\enquote{Konvergenzradius}? & ~ & $\Rightarrow$ Kalkül für $C^0[0,1]$  \\
+  			$\Rightarrow$ analytische Funktionen   & ~ & Stetige Funktionalkalkül \\
+  			$\Rightarrow$ Dunford-Kalkül & ~ & ~ 
+		\end{tabular}
+	\end{figure*}
+\end{bemerkung}
+
+\begin{definition}[Kalkül für Potenzreihen]
+	Sei $f(\lambda) = \sum_{k=0}^{\infty} a_k \lambda^k$, $\left( a_k \right)_{k \in \N_0} \subseteq \C$, Potenzreihe mit Konvergenzradius $R > 0$. Zu $A \in L(X)$, $r(A) < R$ definieren wir:
+	$$ f(A) \coloneqq \lim_{n \rightarrow \infty} \left( \sum_{k = 0}^{n} a_k A^k \right) \eqqcolon \sum_{k =0}^{\infty} a_k A^{k} $$
+	in $L(X)$.
+\end{definition}
+
+% Exercises - End 
 
 % Index									
 \renewcommand{\indexname}{Stichwortverzeichnis}

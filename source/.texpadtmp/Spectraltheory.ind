@@ -4,10 +4,30 @@
 
   \indexspace
 
-  \item closed, \hyperpage{2}
+  \item closable, \hyperpage{3}
+  \item closed, \hyperpage{3}
+  \item closure, \hyperpage{3}
+  \item coercive, \hyperpage{9}
 
   \indexspace
 
   \item dense, \hyperpage{2}
+  \item domain, \hyperpage{2}
+
+  \indexspace
+
+  \item Graph, \hyperpage{3}
+
+  \indexspace
+
+  \item Operator
+    \subitem bounded, \hyperpage{2}
+    \subitem closable, \hyperpage{3}
+    \subitem closed, \hyperpage{3}
+    \subitem closure of, \hyperpage{3}
+
+  \indexspace
+
+  \item range, \hyperpage{2}
 
 \end{theindex}
