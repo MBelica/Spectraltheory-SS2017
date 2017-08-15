@@ -93,7 +93,7 @@
 %% Template
 \makeatletter%
 \DeclareUnicodeCharacter{00A0}{ } \pgfplotsset{compat=1.7} \hypersetup{colorlinks,breaklinks, urlcolor=linkcolor, linkcolor=linkcolor, pdftitle=\@title, pdfauthor=\@author, pdfsubject=\@title, pdfcreator=\@publishers}\DeclareOption*{\PassOptionsToClass{\CurrentOption}{report}} \ProcessOptions \def\baselinestretch{\mystretch} \setlength{\oddsidemargin}{0.125in} \setlength{\evensidemargin}{0.125in} \setlength{\topmargin}{0.5in} \setlength{\textwidth}{6.25in} \setlength{\textheight}{8in} \addtolength{\topmargin}{-\headheight} \addtolength{\topmargin}{-\headsep} \def\pulldownheader{ \addtolength{\topmargin}{\headheight} \addtolength{\topmargin}{\headsep} \addtolength{\textheight}{-\headheight} \addtolength{\textheight}{-\headsep} } \def\pullupfooter{ \addtolength{\textheight}{-\footskip} } \def\ps@headings{\let\@mkboth\markboth \def\@oddfoot{} \def\@evenfoot{} \def\@oddhead{\hbox {}\sl \rightmark \hfil \rm\thepage} \def\chaptermark##1{\markright {\uppercase{\ifnum \c@secnumdepth >\m@ne \@chapapp\ \thechapter. \ \fi ##1}}} \pulldownheader } \def\ps@myheadings{\let\@mkboth\@gobbletwo \def\@oddfoot{} \def\@evenfoot{} \def\sectionmark##1{} \def\subsectionmark##1{}  \def\@evenhead{\rm \thepage\hfil\sl\leftmark\hbox {}} \def\@oddhead{\hbox{}\sl\rightmark \hfil \rm\thepage} \pulldownheader }	\def\chapter{\cleardoublepage  \thispagestyle{plain} \global\@topnum\z@ \@afterindentfalse \secdef\@chapter\@schapter} \def\@makeschapterhead#1{ {\parindent \z@ \raggedright \normalfont \interlinepenalty\@M \Huge \bfseries  #1\par\nobreak \vskip 40\p@ }} \newcommand{\indexsection}{chapter} \patchcmd{\@makechapterhead}{\vspace*{50\p@}}{}{}{}\def\Xint#1{\mathchoice
-    {\XXint\displaystyle\textstyle{#1}} {\XXint\textstyle\scriptstyle{#1}} {\XXint\scriptstyle\scriptscriptstyle{#1}} {\XXint\scriptscriptstyle\scriptscriptstyle{#1}} \!\int} \def\XXint#1#2#3{{\setbox0=\hbox{$#1{#2#3}{\int}$} \vcenter{\hbox{$#2#3$}}\kern-.5\wd0}} \def\dashint{\Xint-} \def\Yint#1{\mathchoice {\YYint\displaystyle\textstyle{#1}} {\YYYint\textstyle\scriptscriptstyle{#1}} {}{} \!\int} \def\YYint#1#2#3{{\setbox0=\hbox{$#1{#2#3}{\int}$} \lower1ex\hbox{$#2#3$}\kern-.46\wd0}} \def\YYYint#1#2#3{{\setbox0=\hbox{$#1{#2#3}{\int}$}  \lower0.35ex\hbox{$#2#3$}\kern-.48\wd0}} \def\lowdashint{\Yint-} \def\Zint#1{\mathchoice {\ZZint\displaystyle\textstyle{#1}}{\ZZZint\textstyle\scriptscriptstyle{#1}} {}{} \!\int} \def\ZZint#1#2#3{{\setbox0=\hbox{$#1{#2#3}{\int}$}\raise1.15ex\hbox{$#2#3$}\kern-.57\wd0}} \def\ZZZint#1#2#3{{\setbox0=\hbox{$#1{#2#3}{\int}$} \raise0.85ex\hbox{$#2#3$}\kern-.53\wd0}} \def\highdashint{\Zint-} \DeclareRobustCommand*{\onlyattoc}[1]{} \newcommand*{\activateonlyattoc}{ \DeclareRobustCommand*{\onlyattoc}[1]{##1} } \AtBeginDocument{\addtocontents{toc} {\protect\activateonlyattoc}} \newcommand{\RightArrow}{\xRightarrow[]{ ~ ~ }} \newcommand{\LeftArrow}{\xLeftarrow[]{ ~ ~ }} \newcommand{\rightArrow}{\xrightarrow[]{ ~ ~ }} \newcommand{\leftArrow}{\xleftarrow[]{ ~ ~ }}
+    {\XXint\displaystyle\textstyle{#1}} {\XXint\textstyle\scriptstyle{#1}} {\XXint\scriptstyle\scriptscriptstyle{#1}} {\XXint\scriptscriptstyle\scriptscriptstyle{#1}} \!\int} \def\XXint#1#2#3{{\setbox0=\hbox{$#1{#2#3}{\int}$} \vcenter{\hbox{$#2#3$}}\kern-.5\wd0}} \def\dashint{\Xint-} \def\Yint#1{\mathchoice {\YYint\displaystyle\textstyle{#1}} {\YYYint\textstyle\scriptscriptstyle{#1}} {}{} \!\int} \def\YYint#1#2#3{{\setbox0=\hbox{$#1{#2#3}{\int}$} \lower1ex\hbox{$#2#3$}\kern-.46\wd0}} \def\YYYint#1#2#3{{\setbox0=\hbox{$#1{#2#3}{\int}$}  \lower0.35ex\hbox{$#2#3$}\kern-.48\wd0}} \def\lowdashint{\Yint-} \def\Zint#1{\mathchoice {\ZZint\displaystyle\textstyle{#1}}{\ZZZint\textstyle\scriptscriptstyle{#1}} {}{} \!\int} \def\ZZint#1#2#3{{\setbox0=\hbox{$#1{#2#3}{\int}$}\raise1.15ex\hbox{$#2#3$}\kern-.57\wd0}} \def\ZZZint#1#2#3{{\setbox0=\hbox{$#1{#2#3}{\int}$} \raise0.85ex\hbox{$#2#3$}\kern-.53\wd0}} \def\highdashint{\Zint-} \DeclareRobustCommand*{\onlyattoc}[1]{} \newcommand*{\activateonlyattoc}{ \DeclareRobustCommand*{\onlyattoc}[1]{##1} } \AtBeginDocument{\addtocontents{toc} {\protect\activateonlyattoc}} 
 	% Titlepage
 	\def\maketitle{ \begin{titlepage} 
 			~\vspace{3cm} 
@@ -162,13 +162,15 @@ We say that $T$ is \textbf{bounded} if it is continuous from $\DO{T}$ into $H$, 
 	\begin{enumerate}
 		\item Let $H = L^2(\R^n)$, then $\DO{T_{0}} = C_c^\infty(\R^n)$ is dense in $H$. Define the operator
 			$$ T_0 = - \Delta,  $$
-			and take $u \in W^{2,2}(\R^n) \setminus C_c^{\infty}(\R^n)$. Due to the density:
+			and take $u \in W^{2,2}(\R^n) \setminus C_c^{\infty}(\R^n)$, s.t $u \in L^2(\R^n)$. Due to the density:
 			$$ \exists ~(u_n)_{n \in \N} \subseteq C_c^{\infty}(\R^n) \colon ~ u_n \rightarrow u \text{ in } W^{2,2}(\R^n). $$
 			As a result, $\left( u_n, -\Delta u_n \right) \in G(T_0)$ converges in $L^2 \times L^2$ to $(u, -\Delta u) \notin G(T_0)$.
-		\item Let $T_1 = - \Delta$, $\DO{T_1} = W^{2,2}(\R^n)$ and $H = L^2(\R^n)$. For $(u_n)_{n \in \N} \subseteq \DO{T_1}$ with 
-			$$ u_n \rightarrow u \in H \text{ and } \left( - \Delta u_n \right) \rightarrow u \in L^2 $$
-			follows that $- \Delta u = v \in L^2(\R^n)$ weakly, i.e. $\forall \varphi \in C_c^{\infty}(\R^n)$:
-			$$ \int_{\R^n} v \varphi \leftArrow \int_{\R^n} \left( - \Delta u_n \right) \varphi = \int_{\R^n} u_n \left( - \Delta \varphi \right) \rightArrow \int_{\R^n} u \left( - \Delta \varphi \right). $$
+		\item Let $H = L^2(\R^n)$, and set $\DO{T_1} = W^{2,2}(\R^n) \subseteq H$. Define the operator
+			$$ T_1 = - \Delta. $$
+		 For $(u_n)_{n \in \N} \subseteq \DO{T_1}$ with 
+			$$ u_n \rightarrow u \in H \text{ and } \left( - \Delta u_n \right) \rightarrow v \in L^2 $$
+			follows that $- \Delta u = v \in L^2(\R^n)$ weakly, i.e. for all $\varphi \in C_c^{\infty}(\R^n)$:
+			$$ \int_{\R^n} v \varphi \longleftarrow \int_{\R^n} \left( - \Delta u_n \right) \varphi = \int_{\R^n} u_n \left( - \Delta \varphi \right) \longrightarrow \int_{\R^n} u \left( - \Delta \varphi \right). $$
 			$\xRightarrow[]{PDE} u \in W^{2,2}(\R^n) = \DO{T_1} \Rightarrow T_1$ is closed.
 	\end{enumerate}
 \end{example}
@@ -192,28 +194,33 @@ We say that $T$ is \textbf{bounded} if it is continuous from $\DO{T}$ into $H$, 
 	Let $T_0 \coloneqq - \Delta$, $\DO{T_0} = C_c^\infty(\R^n)$ is closable with $\overline{T_0} = T_1$.
 	 
 	\begin{proof}
-		Let $u \in L^2(\R^n)$ such that there exists $(u_n)_{n \in \N} \in C_c^\infty(\R^n)$ with $u_n \rightarrow u$ in $L^2$ and $-\Delta u_n \rightarrow u$ in $L^2$, as above: 
+		Let $u \in L^2(\R^n)$ such that there exists $(u_n)_{n \in \N} \subseteq C_c^\infty(\R^n)$ with $u_n \rightarrow u$ in $L^2$ and $-\Delta u_n \rightarrow u$ in $L^2$, as above: 
 		$$ -\Delta u = v \in L^2 $$
-		For a given $u$ the function $u$ is unique $\Rightarrow T_0$ is closable. Let $\overline{T_0}$ be the closure with domain $\DO{\overline{T_0}}$ and $u \in \DO{T_0}$
+		For a given $u$ the function $v$ is unique, and hence, $T_0$ is closable. Let $\overline{T_0}$ be the closure with domain $\DO{\overline{T_0}}$ and $u \in \DO{T_0}$
 		$$ \Rightarrow \Delta u \in L^2 \Rightarrow u \in W^{2,2}(\R^n) = \DO{T_1} \Rightarrow \DO{\overline{T_0}} \subseteq \DO{T_1} $$
 		but $C_c^{\infty}(\R^n)$ is dense in $\DO{T_1} = W_{2,2}(\R^n)$
-		$$ \Rightarrow W^{2,2}(\R^n) \subseteq \DO{\overline{T_0}} \Rightarrow \DO{\overline{T_0}} = \DO{T_1} \Rightarrow T_1 = \overline{T_0}, $$
-		Assumption: 
-		$$ W^{2,2} \not\subseteq \DO{T_0} \Rightarrow \exists u \in W^{2, 2} \setminus D \left( \overline{T_0} \right), ~\exists (u_n)_{n \in \N} \in C^{\infty}_c (\R^n): u_n \rightarrow u \text{ in } W^{2, 2}$$ same argument as in example 1) $\Rightarrow \overline{T_0}$ not closed!
+		$$ \Rightarrow W^{2,2}(\R^n) \subseteq \DO{\overline{T_0}} \Rightarrow \DO{\overline{T_0}} = \DO{T_1} $$
+		$\Rightarrow T_1 = \overline{T_0}$. 
 	\end{proof}	
 \end{example}
+
+\begin{remark}
+	Assume for a second in the example above that $W^{2,2} \not\subseteq \DO{T_0}$ holds:
+		$$ \Rightarrow \exists u \in W^{2, 2} \setminus D \left( \overline{T_0} \right), ~\exists (u_n)_{n \in \N} \in C^{\infty}_c (\R^n): u_n \rightarrow u \text{ in } W^{2, 2}$$ same argument as in example 1) $\Rightarrow \overline{T_0}$ not closed!	
+\end{remark}
+
 
 \begin{recall}
 	If $T \colon H \rightarrow H$ is bounded then $T^*$ is defined through
 	$$ \langle u , T^* v \rangle = \langle T u , v \rangle, ~ \forall u, v \in H $$	
-	In the ... $u \mapsto \langle T u, v \rangle$ deines a continuous linear map on $H$ ($\in H'$), Riesz' representation theorem then ensures the existence of $T^*$.
+	$u \mapsto \langle T u, v \rangle$ defines a continuous linear map on $H$ ($\in H'$). Riesz' representation theorem then ensures the existence of $T^*$.
 \end{recall}
 
 \begin{definition}
-	If $T$ is an unbounded operator on $H$ with dense domain, we defined 
+	If $T$ is an unbounded operator on $H$ with dense domain we define
 		$$ \DO{T^*} \coloneqq \big\{ v \in H \colon \DO{T} \ni u \mapsto \langle T u, v \rangle \text{ can be extended as a linear continuous form on } H \big\} $$
-	Using Riesz representation theorem $\exists! f \in H$:
-		$$ \langle u, f \rangle = \langle T u, v \rangle \forall u \in \DO{T} $$
+	Using Riesz' representation theorem $\exists! f \in H$:
+		$$ \langle u, f \rangle = \langle T u, v \rangle, ~ \forall u \in \DO{T} $$
 	then define $T^* v = f$, where the uniqueness follows from the density of $\DO{T}$ in $H$.
 \end{definition}
 
@@ -224,8 +231,8 @@ We say that $T$ is \textbf{bounded} if it is continuous from $\DO{T}$ into $H$, 
 \begin{example}
 	$T_0^* = T_1$, 
 	\begin{align*}
-		\DO{T_0^*} & = \big\{ v \in L^2(\R^n) \colon C_c^\infty(\R^n) \ni u \mapsto \langle - \Delta u, v \rangle \text{ can be } \\
-			& ~\hspace{3cm} \text{ extended as a linear continuous form on } L^2(\R^n) \big\} \\
+		\DO{T_0^*} & = \big\{ v \in L^2(\R^n) \colon C_c^\infty(\R^n) \ni u \mapsto \langle - \Delta u, v \rangle \text{ can be extended as a linear} \\
+			& ~\hspace{3cm} \text{ continuous form on } L^2(\R^n) \big\} \\
 			& = \big\{ v \in L^2(\R^n) \colon - \Delta v \in L^2(\R^n) \big\} = W^{2,2}(\R^n) = \DO{T_1}
 	\end{align*}
 	Damit ist
@@ -250,13 +257,13 @@ We say that $T$ is \textbf{bounded} if it is continuous from $\DO{T}$ into $H$, 
 	
 	\begin{proof}
 		Let $u \in \DO{T}, \left(v, w^* \right) \in H \times H$ 
-			$$ \Rightarrow \langle V \left( u, TU \right), \left( v, w^* \right) \rangle_{H \times H} = \langle T u, v \rangle - \langle u, w^* \rangle $$
+			$$ \Rightarrow \langle V \left( u, Tu \right), \left( v, w^* \right) \rangle_{H \times H} = \langle T u, v \rangle - \langle u, w^* \rangle $$
 		Considering the right-hand side it follows
 		$$ \langle T u, v \rangle - \langle u, w^* \rangle = 0 ~ \forall u \in \DO{T} \iff v \in \DO{T^*} \text{ and } w^* = T^* v \iff \left( v, w^* \right) \in G\left( T^* \right), $$
-		and considering the left-hand side
-		$$ \Rightarrow \langle V \left( u, TU \right), \left( v, w^* \right) \rangle_{H \times H} = 0 ~ \forall u \in \DO{T} \iff \left( v, w^* \right) \in V \left( G(T) \right)^{\perp} $$
-		In general: $U^{\perp} = \overline{U}^{\perp}$
-		$$ \Rightarrow V \left( G(T) \right)^{\perp} = \left( \overline{V\left( G(T) \right)} \right)^{\perp} = \left( V \left( \overline{G(T)} \right) \right)^{\perp} $$
+		and considering the left-hand side:
+		$$ \Rightarrow \langle V \left( u, Tu \right), \left( v, w^* \right) \rangle_{H \times H} = 0 ~ \forall u \in \DO{T} \iff \left( v, w^* \right) \in V \left( G(T) \right)^{\perp} $$
+		In general: $U^{\perp} = \overline{U}^{\perp}$, and hence
+		$$ \Rightarrow V \left( G(T) \right)^{\perp} = \left( \overline{V\left( G(T) \right)} \right)^{\perp} = \left( V \left( \overline{G(T)} \right) \right)^{\perp}. $$
 	\end{proof}
 \end{theorem}
 
@@ -278,8 +285,8 @@ We say that $T$ is \textbf{bounded} if it is continuous from $\DO{T}$ into $H$, 
 				\end{align*}
 				For any $M \subseteq H \times H$ we have $V \left( M^{\perp} \right) = V(M)^{\perp}$ since for $(u,v) \in V(M)^{\perp}$, $(x,y) \in M$
 				$$ \langle V(u, v) , (x,y) \rangle_{H \times H} = - \langle (u, v ), V(x,y) \rangle_{H \times h} \Rightarrow V(u, v) \in M^{\perp} \Rightarrow (u, v) \in V\left( M^{\perp} \right) $$
-				$\RightArrow V \left( G \left( T^* \right) \right)^{\perp} = \overline{G(T)} = G \left(\overline{T} \right) \RightArrow (0, w) \in G\left( \overline{T} \right) \RightArrow w = 0$
-			\item $G \left( T^{**} \right) \overset{\hyperref[I.2:thm]{Thm}}{\underset{\ref{I.2:thm}}{=}} V \left( \overline{G \left( T^* \right)} \right)^{\perp} \overset{\hyperref[I.1:thm]{Thm}}{\underset{\ref{I.1:thm}}{=}} V \left( G \left( T^* \right) \right)^{\perp} \overset{(\perp)}{=} G \left( \overline{T} \right) \RightArrow \DO{T^{**}} = \DO{\overline{T}}, T^{**} = \overline{T}$
+				$\Longrightarrow V \left( G \left( T^* \right) \right)^{\perp} = \overline{G(T)} = G \left(\overline{T} \right) \Longrightarrow (0, w) \in G\left( \overline{T} \right) \Longrightarrow w = 0$
+			\item $G \left( T^{**} \right) \overset{\hyperref[I.2:thm]{Thm}}{\underset{\ref{I.2:thm}}{=}} V \left( \overline{G \left( T^* \right)} \right)^{\perp} \overset{\hyperref[I.1:thm]{Thm}}{\underset{\ref{I.1:thm}}{=}} V \left( G \left( T^* \right) \right)^{\perp} \overset{(\perp)}{=} G \left( \overline{T} \right) \Longrightarrow \DO{T^{**}} = \DO{\overline{T}}, T^{**} = \overline{T}$
 		\end{enumerate}
 	\end{proof}
 \end{theorem}
@@ -337,9 +344,9 @@ We say that $T$ is \textbf{bounded} if it is continuous from $\DO{T}$ into $H$, 
 			\item[~\hspace{0.25em}~Step 1] $\RO{T}$ is dense in $H$. We have to show that $\RO{T}^\perp = \{ 0 \}$. ~\\
 				Let $w \in H$ such that 
 					$$\langle T u, w \rangle = 0 ~\forall u \in \DO{T}$$
-				$\RightArrow w \in \DO{T^*}$ and $T^* w = 0 \xRightarrow[s.a.]{inj.} w = 0$.
+				$\Longrightarrow w \in \DO{T^*}$ and $T^* w = 0 \xRightarrow[s.a.]{inj.} w = 0$.
 			\item[~\hspace{0.25em}~Step 2] Let $w \colon H \times H \rightarrow H \times H$, $w(x,y) = (y, x)$
-			$$ \RightArrow G\left( T^{-1} \right) = \big\{ \left(x, T^{-1} x\right) \colon x \in \DO{T} \big\} = w\left(G\left(T\right)\right) = \big\{ \left(Ty, y\right) \colon y \in \DO{T} \big\} $$
+			$$ \Longrightarrow G\left( T^{-1} \right) = \big\{ \left(x, T^{-1} x\right) \colon x \in \DO{T} \big\} = w\left(G\left(T\right)\right) = \big\{ \left(Ty, y\right) \colon y \in \DO{T} \big\} $$
 			\begin{align*}
 				G\left( T^{-1} \right) & = G \left( \left( T^* \right)^{-1} \right) ~\overset{\hyperref[I.2:thm]{Proof}}{\underset{\hyperref[I.2:thm]{Thm. I.2}}{=}} w \left( V \left( G \left(T \right)^{\perp} \right) \right) \\
 				& = V \left( w \left( G \left( T \right) \right)^{\perp} \right) =  V \left( w \left( G \left( T \right) \right) \right)^{\perp} \\
