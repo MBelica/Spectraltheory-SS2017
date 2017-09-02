@@ -1,6 +1,6 @@
 \begin{theindex}
 
-  \item bounded, \hyperpage{2}
+  \item bounded, \hyperpage{3}
 
   \indexspace
 
@@ -11,7 +11,7 @@
 
   \indexspace
 
-  \item dense, \hyperpage{2}
+  \item dense, \hyperpage{3}
   \item domain, \hyperpage{2}
 
   \indexspace
@@ -20,8 +20,12 @@
 
   \indexspace
 
+  \item inner product, \hyperpage{2}
+
+  \indexspace
+
   \item Operator
-    \subitem bounded, \hyperpage{2}
+    \subitem bounded, \hyperpage{3}
     \subitem closable, \hyperpage{4}
     \subitem closed, \hyperpage{3}
     \subitem closure of, \hyperpage{4}
