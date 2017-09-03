@@ -84,6 +84,7 @@
 \newtheorem{lemma}{Lemma}  \counterwithin{lemma}{chapter}
 
 \theoremstyle{normal}
+\newtheorem*{theorem*}{Theorem}
 \newtheorem*{recall}{Recall}
 \newtheorem*{example}{Example}
 \newtheorem*{remark}{Remark}
@@ -149,10 +150,10 @@ defined on a subspace $\DO{T}$ of $H$, and we call $\DO{T}$ the \textbf{domain} 
 $$ \RO{T} \coloneqq \operatorname{Image}\left( T \right). $$
 \newpage
 \index{bounded} \index{Operator!bounded}
-We say that $T$ is \textbf{bounded} if it is continuous from $\DO{T}$ into $H$, with respect to the topology induced by $H$. We recall for the definition of bounded operators that if $\DO{T} = H$ holds, boundedness is equivalent to continuity in $0$, boundedness of $T(U_{(X,\|\cdot\|)})$ in $Y$ and there $\exists c < \infty$ such that $\| T x \| \leq c \| x \|$, for proof see the \href{https://github.com/MBelica/Funktionalanalysis-WS2015}{functional analysis} course. ~\bigskip
+We say that $T$ is \textbf{bounded} if it is continuous from $\DO{T}$ into $H$, with respect to the topology induced by $H$. We recall that if $\DO{T} = H$ holds, boundedness of a linear operator is equivalent to continuity in $0$, boundedness of $T(U_{(X,\|\cdot\|)})$ in $Y$ and that there $\exists c < \infty$ such that $\| T x \| \leq c \| x \|$, for proof see theorem 3.3 in the \href{https://github.com/MBelica/Funktionalanalysis-WS2015}{functional analysis} course. ~\bigskip
 
 \index{dense}
- From now on, if $\DO{T} \neq H$ we will assume that $\DO{T}$ is \textbf{dense} in $H$, i.e. $\overline{\DO{T}} = H$. If in this case $T$ would be bounded then $T$ has a unique continuous extension to all of $H$. As this simplifies many considerations some of the following theorems would be trivial, and hence, we won't focus on bounded operators during this lecture.
+ From now on, if $\DO{T} \neq H$ we will assume that $\DO{T}$ is \textbf{dense} in $H$, i.e. $\overline{\DO{T}} = H$. If in this case $T$ would be bounded then $T$ has a unique continuous extension to all of $H$, for proof see proposition 5.10 in the \href{https://github.com/MBelica/Funktionalanalysis-WS2015}{functional analysis} course.  As this simplifies many considerations some of the following theorems would be trivial, and hence, we won't focus on bounded operators during this lecture.
 
 \begin{recall} \index{closed} \index{Operator!closed} \index{Graph}
 	An operator is called \textbf{closed} if the graph 
@@ -247,7 +248,7 @@ We say that $T$ is \textbf{bounded} if it is continuous from $\DO{T}$ into $H$, 
 			& = \big\{ v \in L^2(\R^n) \colon - \Delta v \in L^2(\R^n) \big\} = W^{2,2}(\R^n) = \DO{T_1}
 	\end{align*}
 	Damit ist
-	$$ \langle T_1 u, v \rangle = \langle - \Delta u, v \rangle = \int v \left( - \Delta u \right) = - \int \left( - \Delta v \right) u = \langle u, T_1 v \rangle $$
+	$$ \langle T_1 u, v \rangle = \langle - \Delta u, v \rangle = \int v \left( - \Delta u \right) = \int \left( - \Delta v \right) u = \langle u, T_1 v \rangle $$
 \end{example}
 
 \begin{theorem} \label{I.1:thm}
@@ -283,7 +284,7 @@ We say that $T$ is \textbf{bounded} if it is continuous from $\DO{T}$ into $H$, 
 	\begin{enumerate}
 		\item $\DO{T^*}$ is dense in $H$
 		\item $T^{**} \coloneqq \left( T^* \right)^* = \overline{T}$
-	\end{enumerate} ~\
+	\end{enumerate} 
 	
 	\begin{proof} ~\
 		\begin{enumerate}
@@ -322,8 +323,8 @@ We say that $T$ is \textbf{bounded} if it is continuous from $\DO{T}$ into $H$, 
 	A symmetric operator $T$ is closable.
 	
 	\begin{proof}
-		It suffice to show that for $u_n \in \DO{T}$ with $u_n \rightarrow 0$ and $ u_n \rightarrow x \in H$ we have $x = 0$
-		$$ \langle x,  v \rangle \leftarrow \langle T u_n, v \rangle = \langle u_n , T u \rangle \rightarrow \langle 0, T u \rangle = 0 \quad \forall v \in \DO{T}  $$
+		It suffice to show that for $u_n \in \DO{T}$ with $u_n \rightarrow 0$ and $ T u_n \rightarrow x \in H$ we have $x = 0$
+		$$ \langle x,  v \rangle \leftarrow \langle T u_n, v \rangle = \langle u_n , T v \rangle \rightarrow \langle 0, T u \rangle = 0 \quad \forall v \in \DO{T}  $$
 		$\Rightarrow x = 0$.
 	\end{proof}
 \end{lemma}
@@ -338,7 +339,7 @@ We say that $T$ is \textbf{bounded} if it is continuous from $\DO{T}$ into $H$, 
 	note that the first property implies that $\DO{T} = \DO{T^*}$.
 \end{definition}
 
-\begin{theorem}
+\begin{theorem} \label{thm:1.4}
 	Every self-adjoint operator is closable.
 	
 	\begin{proof}
@@ -393,12 +394,14 @@ $$ \alpha(u, v ) = \langle A u, v \rangle $$
 	\begin{proof} ~\
 		\begin{description}
 			\item[~\hspace{0.25em}~Step 1:] $A$ is injective:
-				$$ \| fu \| \| u \| \overset{C.S.}{\geq} \left| \langle A u, u \rangle \right| = \left| u(u, u) \right| \geq \lambda \| u \|^2 $$
+				\begin{align*}
+					\| Au \| \| u \| \overset{C.S.}{\geq} \left| \langle A u, u \rangle \right| = \left| a(u, u) \right| \geq \lambda \| u \|^2 \tag*{$(+)$}
+				\end{align*}  
 				$\Rightarrow \| A u\| \geq \lambda \| u \|$ for all $u \in V$.
 			\item[~\hspace{0.25em}~Step 2:] $A(V)$ is dense in $V$. Let $u \in V$ such that 
 				$$ \langle A u, v \rangle = 0 \quad \forall v \in V $$
-				take $v = u \Rightarrow a(u, u) = \Rightarrow u = 0$. 
-			\item[~\hspace{0.25em}~Step 3:] $\R(A) = A(V)$ is closed. Let $v_n$ be a sequence in $A(V)$ and let $a_n$ be such that
+				take $v = u \Rightarrow a(u, u) = 0 \Rightarrow u = 0$. 
+			\item[~\hspace{0.25em}~Step 3:] $\R(A) = A(V)$ is closed. Let $v_n$ be a sequence in $A(V)$ and let $u_n$ be such that
 				$$ A u_n = v_n $$
 				$\xRightarrow[]{(+)} u_n$ is a Cauchy sequence $\Rightarrow u_n \rightarrow u \in V$ und $A u_n \rightarrow A u \Rightarrow v_n \rightarrow A u \in A(V)$
 			\item[~\hspace{0.25em}~Step 4:] $u = A^{-1} v \xRightarrow[]{(+)} \|A^{-1} v \| \leq \lambda^{-1} \| v \| ~\forall v \in V$. 
@@ -411,12 +414,90 @@ $$ \exists c < \infty \colon \quad \| u \|_H \leq c \| u \|_V \quad \forall u \i
 and we assume that $V$ is dense in $H$.
 
 \begin{example}
-	$V = W^{1,1}(\R^n)$, $H = L^2(\R^n)$
+	$V = W^{1,2}(\R^n)$, $H = L^2(\R^n)$
  		$$ \| u \|_L^2 \leq \| u \|_{W^{1,2}} $$	
  	There exists a natural injection from $H$ into $V'$. Let $h \in H$ then $V \ni u \mapsto \langle u, h \rangle_H$ is continuous on $V$ $\xRightarrow[\text{\hyperref[II.1:thm]{Thm. II.1}}]{} \exists l_h \in V'$:
  		$$ l_h(u) = \langle u, h \rangle_H \quad \forall u \in V $$
- 	injectivity follows from density of $V$ in $H$. $V \subseteq H $
+ 	injectivity follows from density of $V$ in $H$. $V \subseteq H \subset V'$ cont. sesquilinear form $a$ on $V \times V$ which is $V$-coercive $\rightarrow$ Associate an unbounded operator $S$ with $a$
+ 		$$ \DO{S} \coloneqq \big\{ u \in V \colon a(u, v) \text{ is cont. on } V \text{ with respect to the topology induced by } H \big\} $$
 \end{example}
+
+% todo skipped a part! Unreadable
+
+\begin{theorem} \label{thm:2.3}
+	Let $a$ be a continuous sesquilinear form on $V$ which is $V$-coercive then $S$ is bijective from $\DO{S}$ into $H$ and $S^{-1} \in L(H, \DO{S})$. Moreover, $\DO{S}$ is dense in $H$.
+	
+	\begin{proof} ~\
+		\begin{enumerate}[label=\arabic*\upshape)]
+			\item $S$ injective: $\exists \alpha > 0$: 
+				$$ \alpha \| u \|^2_H \leq C \alpha \| u \|^2_V \leq C \left| a (u,u) \right| = c \left| \langle S u, u \rangle_H \right| \leq c \| Su\|_H \| u \|_H, \quad \forall u \in \DO{S} $$
+				$\Rightarrow \alpha \|u\|_H \leq c \| Su\|_H, ~ \forall u \in \DO{S} ~(+)$.
+			\item $S$ surjective: ~\\
+				Let $h \in H$. Choose $w \in V$ such that
+				$$ \langle h, v \rangle_H = \overline{\langle v, h \rangle_H} = \overline{l_h(v)} = \langle w, v \rangle \quad \forall v \in V $$
+				where we used Riesz' representation theorem in the last step. 
+				$$\text{(Note: $l_h \in V' \Rightarrow \overline{l_h} \in$ continuous lineare form on $V$).} $$ % todo stimmt das hier? Schwer lesbar! 
+				Define $u \coloneqq A^{-1} w \in V \Rightarrow a(u,v) = \langle A u, v \rangle_V = \langle w, v \rangle_V = \langle h, v \rangle_H$
+				$$ \Rightarrow u \in \DO{S}, ~Su = h $$
+				($V$ dense in $H$). $(+)$ implies that $S^{-1}$ is continuous.
+			\item Density of $\DO{S}$: ~\\
+				Let $h \in H$ such that $\langle u, h \rangle_H = 0 ~\forall u \in \DO{S}$. $S$ surjective $\exists v \in DO{S}$: $Sv = h$
+				$$ \Rightarrow \langle Sv, u \rangle = 0 ~ \forall u \in \DO{S} $$
+				$$ \Rightarrow \langle Sv, v \rangle_H = 0 \Rightarrow a(v, v) = 0 \Rightarrow v = 0 \Rightarrow h = 0 $$
+				$a$ hermitian iff
+				$$ a(u,v) = \overline{a(v, u)} \quad \forall u, v \in V $$
+		\end{enumerate}
+	\end{proof}	
+\end{theorem}
+
+\begin{theorem}
+	Under the assumptions of \hyperref[thm:2.3]{Theorem II.3} and $a$ being hermitian it follows that
+		\begin{enumerate}
+			\item $S$ is closed
+			\item $S = S^*$
+			\item $\DO{S}$ dense in $V$
+		\end{enumerate}
+		
+		\begin{proof} ~\
+			\begin{enumerate}
+				\item \hyperref[thm:1.4]{Theorem I.4}
+				\item $a$ hermitian
+					$$ \Rightarrow \langle Su, v \rangle_H = a(u, v) = \overline{a(v, u)} = \overline{\langle Sv, u \rangle_H} = \langle u, Sv \rangle_H \quad \forall u, v \in \DO{S} $$
+					$\Rightarrow S$ symmetric $\Rightarrow \DO{S} \subset \DO{S^*}$. Let $v \in \DO{S^*}$, $S$ surjective 
+						$$\Rightarrow v_0 \in \DO{S}: S v_0 = S^* v. $$ 
+					For all $u \in \DO{S}$ we get
+					$$ \langle Su, v_0 \rangle_H = \langle u, S v_0 \rangle_H = \langle u, S^* v \rangle_H = \langle S u, v \rangle_H $$
+					$\Rightarrow v = v_0 \Rightarrow \DO{S} = \DO{S^*}$, $Sv = S^* v ~\forall v \in \DO{S}$.
+				\item follows from \hyperref[thm:2.3]{Theorem II.3}
+			\end{enumerate}	
+		\end{proof}
+\end{theorem}
+
+\chapter{Friedrichs extension}
+
+\begin{definition}
+	Let $T_0$ be a symmetric unbounded operator with domain $\DO{T_0}$ we say that $T_0$ is semi bounded if $\exists c > 0$:
+		$$ \langle T_0 u, u \rangle_H \geq - c \| u \|_H^2 \quad \forall u \in \DO{T_0} $$	
+\end{definition}
+
+\begin{example} ~\
+	\begin{enumerate}
+		\item Schrödinger Operator. $\R^m$, $H = L^2(\R^m)$, $\DO{T_0} = C_c^\infty(\R^m)$
+				$$ T_0 \coloneqq - \Delta + V, $$
+			$V \in C_0(\R^m)$ with $V(x) \geq - c ~\forall x \in \R^m$
+	\end{enumerate}	
+\end{example}
+
+
+\appendix
+
+\chapter*{Addendum}
+
+\begin{theorem*}[Riesz' representation theorem, FA 17.2]
+	To all $x' \in X'$ there exists a unique $x \in X$ such that
+	$$ x'(y) = \langle y, x \rangle,  $$
+	for $y \in X$ and $\|x'\|_{X'} = \|x\|_X$.
+\end{theorem*}
 
 
 % Exercises - End 

@@ -2,3 +2,4 @@
 \activateonlyattoc 
 \contentsline {chapter}{\numberline {I}Unbounded, adjoint and self-adjoint operators}{2}{chapter.1}
 \contentsline {chapter}{\numberline {II}Representation Theorems}{9}{chapter.2}
+\contentsline {chapter}{\numberline {III}Friedrichs extension}{13}{chapter.3}
