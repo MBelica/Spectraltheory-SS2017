@@ -480,14 +480,54 @@ and we assume that $V$ is dense in $H$.
 		$$ \langle T_0 u, u \rangle_H \geq - c \| u \|_H^2 \quad \forall u \in \DO{T_0} $$	
 \end{definition}
 
+\index{Hardy inequality}
 \begin{example} ~\
 	\begin{enumerate}
 		\item Schrödinger Operator. $\R^m$, $H = L^2(\R^m)$, $\DO{T_0} = C_c^\infty(\R^m)$
-				$$ T_0 \coloneqq - \Delta + V, $$
-			$V \in C_0(\R^m)$ with $V(x) \geq - c ~\forall x \in \R^m$
+				$$ T_0 \coloneqq - \Delta + V(x), $$
+			$V \in C_0(\R^m)$ with $V(x) \geq - c ~\forall x \in \R^m$. For $u \in \DO{T_0}$
+			$$ \langle T_0 u, u \rangle_H = \int_{\R^m} \left( \Delta u + V u \right) u = \underbrace{\int_{\R^m} \left| \nabla u \right|^2}_{\geq 0} + \underbrace{\int_{\R^m} V(x) \left| u(x) \right|^2}_{\geq - c \int |u|^2 = - c \|u \|^2_H} $$
+		\item $S_z \coloneqq - \Delta - \frac{z}{r}$, whereas $r = |x|, z \in \R$ ~\\ 
+		
+			\textbf{Hardy inequality} in $\R^3 (m = 3)$:
+				$$ \int_{\R^3} |x|^{-2} |u(x)|^2 dx \leq  4 \int_{\R^3} \left| \nabla u \right|^2 (x) dx \quad \forall u \in C_c^\infty(\R^m) $$
+				\begin{proof}
+					$\int_{\R^3} \left| \nabla u + \frac{1}{2} \frac{x}{|x|^2} u \right|^2 dx \geq 0$ 
+					$$ \iff \int_{\R^3} \left| \nabla u \right|^2 + \frac{1}{4} \frac{|u|^2}{|x|^2} dx \geq - \int_{\R^3} \langle \nabla u(x), \frac{x}{|x|} \rangle u(x) dx $$
+					now
+					$$ -2 \int_{\R^3} \langle \nabla u, \frac {|x|^2}{|x|^2} \rangle u dx = - \int_{\R^3} \langle \nabla |u|^2, \frac{x}{|x|^2} dx = \int_{\R^3} |u|^2 \underbrace{\operatorname{div} \frac{x}{|x|^2}}_{= \frac{1}{|x|^2}} = \int_{\R^3} \frac{|u|^2}{|x|^2} dx $$ % todo hier stimmt doch was nicht
+					$\Rightarrow \int |\nabla u|^2 \geq \frac{1}{4} \int \frac{|u|^2}{|x|^2}$. Now
+					$$ \int_{\R^3} \frac{1}{r} |u(x)|^2 dx \leq \left( \int \frac{|u(x)|^2}{r^2} dx \right)^{\frac{1}{2}} \cdot \| u \|_L^2 $$
+					$\int_{\R^3} \frac{1}{r^2} |u(x)|^2 dx \leq 4 \langle - \Delta u, u \rangle_L^2$
+					$$ \Rightarrow \forall \epsilon > 0: \quad \int_{\R^3} \frac{1}{r} |u(x)|^2 dx \leq \epsilon \cdot \langle-\Delta u, u \rangle_L^2 + \frac{1}{\epsilon} \| u \|_{L^2}^2 $$
+					hence 
+					$$ \langle S_z u, u \rangle_{L^2} = \langle - \Delta u, u \rangle_{L^2} - z \langle \frac{u}{r}, u \rangle_{L^2} \geq (1 - \epsilon) \langle - \Delta u, u \rangle_{L^2} - \frac{z}{\epsilon} \| u \|^2_{L^2} $$
+					Choose $\epsilon = \frac{1}{z} \Rightarrow \langle S_z u, u \rangle_{L^2} \geq - z^2 \| u\|^2_{L^2}$
+				\end{proof}
 	\end{enumerate}	
 \end{example}
 
+\index{Friedrichs extension}
+\begin{theorem}
+	A symmetric semibounded operator $T_0$ on $H$ with dense domain $\DO{T_0}$ admits a self-adjoint extension, called \textbf{Friedrichs extension}.
+	
+	\begin{proof}
+		Replace $T_0$ by $T_0 + \lambda \mathbb{I}$ such that
+		$$ \langle T_0 u, u \rangle_H \geq \|u\|_H^2 \quad \forall u \in \DO{T_0} $$
+		$(u,v) \mapsto a_0(u,v) \coloneqq \langle T_0 u, v \rangle_H$ on $\DO{T_0} \times \DO{T_0}$
+		$$ \Rightarrow a_0(u,u) \geq \| u \|^2_H $$
+		Let $V$ be the completion in $H$ of $\DO{T_0}$ for the norm $u \mapsto \rho_0(u) = \sqrt{a_0(u,u)}$
+		$\iff u \in H$ belongs to $V$ if $\exists u_n \in \DO{T_0}$ s.t. $u_n \rightarrow u$ in $H $ and $ (u_n)_{n \in \N}$ is a Cauchy sequence with respect to $\rho_0$ ~\\
+		
+		\enquote{Candidate Norm}:
+		$$ \| u \|_V = \lim_{n \rightarrow \infty} \rho_0(u_n) $$
+		where $u_n$ is as above.
+	\end{proof}
+\end{theorem}
+
+\begin{lemma}
+	Let $(x_n)_{n \in \N}$ be a Cauchy sequence
+\end{lemma}
 
 \appendix
 
