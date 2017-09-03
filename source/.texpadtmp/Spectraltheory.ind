@@ -1,6 +1,7 @@
 \begin{theindex}
 
   \item bounded, \hyperpage{3}
+    \subitem semi-, \hyperpage{13}
 
   \indexspace
 
@@ -13,6 +14,10 @@
 
   \item dense, \hyperpage{3}
   \item domain, \hyperpage{2}
+
+  \indexspace
+
+  \item Friedrichs extension, \hyperpage{14}
 
   \indexspace
 
@@ -37,5 +42,15 @@
   \indexspace
 
   \item range, \hyperpage{2}
+  \item resolvent function, \hyperpage{18}
+  \item resolvent set, \hyperpage{18}
+
+  \indexspace
+
+  \item semi-bounded, \hyperpage{13}
+  \item spectrum, \hyperpage{18}
+    \subitem continuous, \hyperpage{18}
+    \subitem point, \hyperpage{18}
+    \subitem residual, \hyperpage{18}
 
 \end{theindex}

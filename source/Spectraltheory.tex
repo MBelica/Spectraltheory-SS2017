@@ -4,6 +4,8 @@
 \usepackage{scrextend}
 \usepackage{amssymb}
 \usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{dsfont}
 \usepackage{booktabs}
 \usepackage{chngcntr}
 \usepackage{cmap}
@@ -88,6 +90,7 @@
 \newtheorem*{recall}{Recall}
 \newtheorem*{example}{Example}
 \newtheorem*{remark}{Remark}
+\newtheorem*{remarks}{Remarks}
 \newtheorem*{satz}{Satz}
 \newtheorem*{bemerkung}{Bemerkung}
 
@@ -265,7 +268,7 @@ We say that $T$ is \textbf{bounded} if it is continuous from $\DO{T}$ into $H$, 
 \begin{theorem} \label{I.2:thm}
 	Let $T$ be an operator in $H$ with domain $\DO{T}$. Then
 		$$ G \left( T^* \right) = \left( V \left( \overline{G(T)} \right) \right)^{\perp} $$
-	where $V \colon H \times H \rightarrow H \times H, V(x, y) = (y, -x)$ ($V^2 = - \mathbb{I}$).
+	where $V \colon H \times H \rightarrow H \times H, V(x, y) = (y, -x)$ ($V^2 = - \mathds{1}$).
 	
 	\begin{proof}
 		Let $u \in \DO{T}, \left(v, w^* \right) \in H \times H$ 
@@ -475,8 +478,9 @@ and we assume that $V$ is dense in $H$.
 
 \chapter{Friedrichs extension}
 
+\index{semi-bounded} \index{bounded!semi-}
 \begin{definition}
-	Let $T_0$ be a symmetric unbounded operator with domain $\DO{T_0}$ we say that $T_0$ is semi bounded if $\exists c > 0$:
+	Let $T_0$ be a symmetric unbounded operator with domain $\DO{T_0}$ we say that $T_0$ is \textbf{semi-bounded} if $\exists c > 0$:
 		$$ \langle T_0 u, u \rangle_H \geq - c \| u \|_H^2 \quad \forall u \in \DO{T_0} $$	
 \end{definition}
 
@@ -512,7 +516,7 @@ and we assume that $V$ is dense in $H$.
 	A symmetric semibounded operator $T_0$ on $H$ with dense domain $\DO{T_0}$ admits a self-adjoint extension, called \textbf{Friedrichs extension}.
 	
 	\begin{proof}
-		Replace $T_0$ by $T_0 + \lambda \mathbb{I}$ such that
+		Replace $T_0$ by $T_0 + \lambda \mathds{1}$ such that
 		$$ \langle T_0 u, u \rangle_H \geq \|u\|_H^2 \quad \forall u \in \DO{T_0} $$
 		$(u,v) \mapsto a_0(u,v) \coloneqq \langle T_0 u, v \rangle_H$ on $\DO{T_0} \times \DO{T_0}$
 		$$ \Rightarrow a_0(u,u) \geq \| u \|^2_H $$
@@ -526,8 +530,128 @@ and we assume that $V$ is dense in $H$.
 \end{theorem}
 
 \begin{lemma}
-	Let $(x_n)_{n \in \N}$ be a Cauchy sequence
-\end{lemma}
+	Let $(x_n)_{n \in \N}$ be a Cauchy sequence in $\DO{T_0}$  with respect to $\rho_0$ such that $x_n \rightarrow 0 $ in $H$. Then $p_0(x_n) \rightarrow 0$. 
+	
+	\begin{proof}
+		Observe that $p_0(x_n)$ is a Cauchy sequence in $\R_+$, and hence, converges in $\overline{\R_+}$. Assume that  $p_0(x_n) \rightarrow \alpha > 0$. Now $a_0(x_n, x_m) = a_0(x_n, x_n) + a_0(x_n, x_m - x_n)$
+		$$ \left| a_0(x_n, x_m - x_n) \right| \leq \sqrt{a_0(x_n, x_n)} \sqrt{a_0(x_m - x_n, x_m - x_n)} $$
+		$\forall \epsilon > 0 ~\exists N ~\forall n, m \geq N$:
+		$$ \left| a_0(x_n, x_m) - \alpha^2 \right| < \epsilon $$
+		$\epsilon = \frac{\alpha^2}{2} \Rightarrow |a_0(x_n, x_m) | = \left| \langle T_0 x_n, x_m \rangle \right| \geq \frac{1}{2} \alpha^2 > 0 ~\forall n, m \geq N$. Let $m \rightarrow \infty \Rightarrow x_m \rightarrow 0$, which leads to the contradiction.
+	\end{proof}
+\end{lemma} % todo page 13!??!? skipped that completely
+
+\begin{theorem}[Example: Dirichlet Realisation]
+	Let $\Omega \subseteq \R^n$ be a bounded domain, $\partial \Omega$ smooth, $T_1$ is defined by:
+	$$ \DO{T_1} = W^{2,2}(\Omega) \cap W_{0}^{1,2}(\Omega), ~ T_1 = - \Delta \colon \DO{T_1} \rightarrow L^2(\Omega) $$
+	$T_1$ is self-adjoint; $T_1$ is called the Dirichlet realisation of $-\Delta$.
+	
+	\begin{proof}(with gaps) ~\\
+		Define 
+		$$ \DO{T_0} \coloneqq C_c^\infty(\Omega), ~ T_0 \coloneqq - \Delta, ~ H = L^2(\Omega) $$
+		Through integration by parts respectively Green's formula:
+		$$ T_0 \text{ is symmetric, non-negative (i.e. semi-bounded)} $$
+		Consider $\tilde{T_0} \coloneqq T_0 + \mathds{1}_H$. $V$: closure of $C_c^\infty(\Omega)$. in $W^{2,2}(\Omega)$
+		$$ \xRightarrow[\underset{ext.}{Friedrich}]{S} \DO{S} = \big\{ u \in W_0^{12}(\Omega) ~| -\Delta u \in L^2(\Omega) \big\} $$
+		$$ \xRightarrow[Theory]{Regularity} \DO{S} = W^{2,2} \cap W_0^{1,2}(\Omega) $$
+		for more details about the regularity theory see \enquote{2nd order elliptic operators}, PDE Evans.
+	\end{proof}
+\end{theorem} \newpage
+
+\begin{example} ~\
+	\begin{enumerate} 
+		\item Harmonic oscillator ~\\
+			Define $\DO{T_0} \coloneq C_c^\infty(\R^n)$, $T_0 \coloneqq -\Delta + |x|^2 + 1$, $ = L^2(\R^2)$. Let $V$ be the completion of $C_c^\infty$ in $L^2$ with respect to the norm
+			$$ u \mapsto \left( \langle \nabla u, \nabla u \rangle_{L^2} + \langle |x|u(x), |x|u(x)\rangle_{L^2} + \langle u, u \rangle_{L^2} \right)^{\frac{1}{2}} = \sqrt{\langle T_0 u, u \rangle_{L^2}}. $$
+			By calculation:
+			$$ V = \big\{ u \in W^{1,2}(\R^n) ~|~x_j u \in L{^2}(\R^n) ~\forall j = 1, \dotsc, n \big\} $$
+			Domain of $S$:
+			$$ \DO{S} = \big\{ u \in V ~|~ T \circ u \in L^2(\R^n) \big\} = \big\{ u \in W^{2,2}(\R^n) \colon x^{\alpha} u \in L^2(\R^n) ~\forall \alpha \in \N_0^n, ~|\alpha| \leq 2 \big\} $$
+		\item Schrödinger operator with a Coulomb potential ~\\
+			Define $\DO{T_{0}} \coloneqq C_c^\infty(\R^3), ~ T_0 = - \Delta - \frac{1}{r}, ~ H = L^2(\R^3)$. We saw that $T_0$ is semi-bounded: $\langle T_0 u, u \rangle_{L^2} \geq - \| u \|_{L^2}^2$
+			$$\tilde{T_0} \coloneqq T_0 + 2 \cdot \mathds{1}_H, ~ \DO{\tilde{T_0}} = \DO{T_0}$$ 
+			satisfies the assumptions of the Friedrichs extension. Completion $V$ of $C_c^{\infty}$ in $L^2$ with respect to the norm % todo is it really a 2
+			$$ u \mapsto \left( \langle \nabla u, \nabla u \rangle_{L^2} + \int_{\R^3} \left( 2 - \frac{1}{r} \right) |u(x)|^2 dx \right)^\frac{1}{2} = \sqrt{ \langle \tilde{T_0} u, u \rangle_{L^2}} $$
+			is $V = W^{1,2}(\R^3)$.
+			
+			\begin{proof}
+				$C_c^\infty(\R^3)$ is dense in $W^{1,2}(\R^3)$. Therefore, we only need to check that the norm above and $\| \cdot \|_{W^{1,2}}$ are equivalent. By the proof of the analysis of the Schrödinger operator:
+				$$ \int_{\R^3} \frac{1}{r} |u(x)|^2 dx \leq \epsilon \langle - \Delta u, u \rangle_{L^2} + \frac{1}{\epsilon} \| u \|_{L^2}^2 = \epsilon \| \nabla u \|_{L^2}^2 + \frac{1}{\epsilon} \| u \|^2_{L^2} \quad \forall \epsilon > 0, ~u \in C_c^\infty(\R^3) $$
+				(See Bernhard Helfer, \enquote{Spectral theory and app.}).
+				$$ \| w \|_{W^{1,2}}^2 = \| \nabla u \|_{L^2}^2 + \| u \|_{L^2}^2 \overset{Hardy}{\leq} 5 \| \nabla u \|^2_{L^2} + \| \left( 2 - \frac{1}{r} \right) u \|^2_{L^2} \quad \forall u \in C_c^\infty(\R^3) $$
+				Domination of $S$: Hardy inequality $\Rightarrow \frac{1}{r} u \in L^2$ for $u \in W^{1,2}(\R^3)$.
+				$$ \Rightarrow u \in D(S): ~ \Delta u \in L^2(\R^3) \Rightarrow \DO{S} = W^{2,2}(\R^3) $$
+			\end{proof}
+		\item Neumann boundary conditions: on the half-plane $H = L^2\left( (0, \infty) \right)$ define the form
+			$$ a(u, v) \coloneqq \int_{0}^{\infty} u'(x) v'(x) dx  $$
+			for $u,v \in \DO{a} = W^{1,2}(0, \infty) \Rightarrow a(u,u) = \|u'\|_{L^2}^2 \geq - \| u \|_{L^2}^2$. $a$ is closed by completeness of $W^{1,2}(0, \infty)$. ~\\
+			
+			Associated operator $T$: $v \in \DO{T} ~\exists f_v \in L^2(0, \infty)$:
+			$$ \int_0^\infty u'(x) v'(x) dx = \int_0^\infty u(x) f_v(x) dx \quad \forall u \in W^{1,2}(0, \infty). $$
+			$\Rightarrow f_v = - \left( v' \right)' = - v''$, therefore $v \in W^{2,2}(0, \infty), Tv = - v''$. Note for $v \in W^{2,2}(0, \infty)$, $u \in W^{1,2}(0, \infty)$:
+			\begin{align*}
+				a(u, v) & = \int_0^\infty u'(x) v'(x) dx \\
+				& = \left[ u(x) v'(x) \right]_0^\infty - \int_0^\infty u(x) v''(x) dx \\
+				& = \underbrace{u(0)v'(0)}_{= 0} + \int_0^\infty u(x) T v(x) dx = \langle u, Tv \rangle_{L^2}
+			\end{align*}
+			Thereforem the associated operator is $T_N \coloneqq T$ acts as $T_N v = - v''$ on the domain 
+				$$ \DO{T_N} = \big\{ v \in W^{2,2}(0, \infty) ~|~v'(0) = 0 \big\} $$
+				$T_N$ is called the Neumann Laplacian.
+	\end{enumerate}	
+\end{example}
+
+\chapter{Spectrum and Resolvent}
+
+Let $X$ be a Banach space and $H$ a Hilbert space.
+
+\index{resolvent set} \index{spectrum} \index{spectrum!point} \index{spectrum!continuous} \index{spectrum!residual} \index{resolvent function}
+\begin{definition}
+	Let $T \colon \DO{T} \subseteq  \rightarrow X$ linear operator. We define
+	\begin{itemize}
+		\item We call the following set the \textbf{resolvent set}:
+			$$\operatorname{res}(T) \coloneqq \rho(T) \coloneqq \big\{ \lambda \in \C ~|~\lambda \mathds{1} - T \text{ is bijective with bounded inverse} \big\}. $$
+		\item The set $\operatorname{spec}(T) \coloneqq \sigma(T) \coloneqq \C \setminus \rho(T)$ is called \textbf{spectrum}.
+		\item The set $\operatorname{spec}_p(T) \coloneqq \sigma_p(T) \coloneqq \big\{ \text{Eigenvalues of } T \big\}$ is the \textbf{point spectrum}.
+		\item The following set is called the \textbf{continuous spectrum}: $ ~  \operatorname{spec}_c(T) \coloneqq \sigma_c(T)$
+			$$ \sigma_c(T) \coloneqq \big\{ \lambda \in \C ~|~\lambda \mathds{1} - T \text{ is inj., but not surj., } \operatorname{range}(\lambda \mathds{1} - T) \text{ is dense in } X \big\} $$
+		\item The following set is called the \textbf{residual spectrum}: $ ~ \operatorname{spec}_{res}(T) \coloneqq \sigma_{res}(T) $
+				$$ \sigma_{res}(T) \coloneqq \big\{ \lambda \in \C ~|~\lambda \mathds{1} - T \text{ is inj., but not surj., } \operatorname{range}(\lambda \mathds{1} - T) \text{ is not dense in } X \big\} $$
+		\item The \textbf{resolvent function}: $R_T \colon \rho(T) \rightarrow L(X, X) \eqqcolon L(X)$
+			$$ \lambda \mapsto R_T(\lambda) \coloneqq R(\lambda, T) \coloneqq \left( \lambda \mathds{1} - T \right)^{-1} $$
+	\end{itemize}
+\end{definition}
+
+\begin{remarks} ~\
+	\begin{itemize}
+		\item $\dim(X) < \infty: \sigma(T) = \sigma_p(T)$
+		\item $\sigma(T) = \sigma_p(T) \overset{.}{\cup} \sigma_c(T) \overset{.}{\cup} \sigma_{res}(T)$
+	\end{itemize}	
+\end{remarks} ~\\
+
+\begin{theorem}
+	If $\rho(T) \neq \emptyset$ then $T$ is closed.
+	
+	\begin{proof}
+		$\lambda \in \rho(T)$ then $\operatorname{graph}(R(\lambda, T))$ is closed (by the \hyperref[thm:a.cgt]{closed graph theorem}). For $x \in \DO{T}, y \in X$ with $R(\lambda, T) y = x$:
+		$$ \| x \|_{\lambda \mathds{1} - T} = \| (\lambda - T) x \|_X + \| x \|_X = \| y \|_X + \| R(\lambda, T) y \|_X = \| y \|_{R(\lambda, T)}. $$
+		Therefore, $\operatorname{graph}(\lambda \mathds{1} - T)$ and $\operatorname{graph}(R(\lambda, T))$ are isometric, and so $\lambda \mathds{1} - T$ is closed 
+		$$ \Rightarrow T \text{ is closed} $$
+	\end{proof}	
+\end{theorem}
+
+\begin{theorem}
+	For a closed operator $T$ one has the equivalence
+	$$ \lambda \in \rho(T) \iff \begin{cases} \operatorname{kern}(\lambda \mathds{1} - T) = 0, & \text{\enquote{inj.}} \\ \operatorname{range}(\lambda \mathds{1} - T) = X, & \text{\enquote{surj.}}\end{cases} $$
+	
+	\begin{proof} ~\
+		\begin{description}
+			\item[\hspace{0.25cm}\enquote{$\Rightarrow$}] By definition.
+			\item[\hspace{0.25cm}\enquote{$\Leftarrow$}] Let $\lambda \in C$ with $\operatorname{kern}(\lambda \mathds{1} - T) = 0$, $\operatorname{range}(\lambda \mathds{1} - T) = X$. Then the inverse
+			$$ \left( \lambda \mathds{1} - T \right)^{-1} \colon X \rightarrow X $$
+			is defined everywhere and has a closed graph (as $\lambda \mathds{1} - T$ is closed), see proof of Theorem IV. 1. By the \hyperref[thm:acgt]{closed graph theorem} $\left( \lambda \mathds{1} - T \right)^{-1}$ is bounded, i.e. $\lambda \in \rho(T)$. 
+		\end{description}
+	\end{proof}
+\end{theorem}
 
 \appendix
 
@@ -537,6 +661,10 @@ and we assume that $V$ is dense in $H$.
 	To all $x' \in X'$ there exists a unique $x \in X$ such that
 	$$ x'(y) = \langle y, x \rangle,  $$
 	for $y \in X$ and $\|x'\|_{X'} = \|x\|_X$.
+\end{theorem*}
+
+\begin{theorem*}[Closed graph theorem, FA 12.6] \label[thm:acgt]
+	 If $X$ and $Y$ are Banach spaces, and $T \colon X \rightarrow Y$ is a linear operator, then $T$ is continuous if and only if its graph is closed in $X \times Y$, with respect to the product topology.
 \end{theorem*}
 
 
