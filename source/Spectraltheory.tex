@@ -86,9 +86,11 @@
 \newtheorem{lemma}{Lemma}  \counterwithin{lemma}{chapter}
 
 \theoremstyle{normal}
+\newtheorem*{definition*}{Definition}
 \newtheorem*{theorem*}{Theorem}
 \newtheorem*{recall}{Recall}
 \newtheorem*{example}{Example}
+\newtheorem*{statements}{Statements}
 \newtheorem*{remark}{Remark}
 \newtheorem*{remarks}{Remarks}
 \newtheorem*{satz}{Satz}
@@ -130,7 +132,7 @@
 % Lecture Notes - Start 			
 \pagenumbering{arabic}
 
-\chapter{Unbounded, adjoint and self-adjoint operators}
+\chapter{Unbounded, adjoint and self-adjoint Operators}
 
 
 Let $H$ be a separable Hilbert space, i.e. a real or complex inner product space that is also a complete metric space with respect to the distance function induced by the inner product $\langle \cdot, \cdot \rangle$ on $H$. ~\bigskip
@@ -232,6 +234,7 @@ We say that $T$ is \textbf{bounded} if it is continuous from $\DO{T}$ into $H$, 
 	$u \mapsto \langle T u, v \rangle$ defines a continuous linear map on $H$ ($\in H'$). Riesz' representation theorem then ensures the existence of $T^*$.
 \end{recall}
 
+\index{adjoint}
 \begin{definition}
 	If $T$ is an unbounded operator on $H$ with dense domain we define
 		$$ \DO{T^*} \coloneqq \big\{ v \in H \colon \DO{T} \ni u \mapsto \langle T u, v \rangle \text{ can be extended as a linear continuous form on } H \big\} $$
@@ -306,6 +309,7 @@ We say that $T$ is \textbf{bounded} if it is continuous from $\DO{T}$ into $H$, 
 	\end{proof}
 \end{theorem}
 
+\index{symmetric}
 \begin{definition}
 	We say $T \colon \DO{T} \rightarrow H$ is \textbf{symmetric} if and only if
 	$$ \langle Tu, v \rangle = \langle u , Tv \rangle \quad \forall u, v \in \DO{T} $$
@@ -336,8 +340,9 @@ We say that $T$ is \textbf{bounded} if it is continuous from $\DO{T}$ into $H$, 
 	The proof actually shows that if $\DO{T^*}$ is dense in $H$, then $T$ is closable.	
 \end{remark}
 
+\index{self-adjoint}
 \begin{definition}
-	We call an operator $T$ self-adjoint if 
+	We call an operator $T$ \textbf{self-adjoint} if 
 		$$ T = T^* \text{ and }  Tu = T^* u \quad \forall u \in \DO{T},  $$ % todo wieso ist diese Forderung nötig?
 	note that the first property implies that $\DO{T} = \DO{T^*}$.
 \end{definition}
@@ -425,7 +430,10 @@ and we assume that $V$ is dense in $H$.
  		$$ \DO{S} \coloneqq \big\{ u \in V \colon a(u, v) \text{ is cont. on } V \text{ with respect to the topology induced by } H \big\} $$
 \end{example}
 
-% todo skipped a part! Unreadable
+\begin{center}
+	\textit{\color{red} skipped a part! Unreadable}
+\end{center} % todo skipped a part! Unreadable
+
 
 \begin{theorem} \label{thm:2.3}
 	Let $a$ be a continuous sesquilinear form on $V$ which is $V$-coercive then $S$ is bijective from $\DO{S}$ into $H$ and $S^{-1} \in L(H, \DO{S})$. Moreover, $\DO{S}$ is dense in $H$.
@@ -439,7 +447,10 @@ and we assume that $V$ is dense in $H$.
 				Let $h \in H$. Choose $w \in V$ such that
 				$$ \langle h, v \rangle_H = \overline{\langle v, h \rangle_H} = \overline{l_h(v)} = \langle w, v \rangle \quad \forall v \in V $$
 				where we used Riesz' representation theorem in the last step. 
-				$$\text{(Note: $l_h \in V' \Rightarrow \overline{l_h} \in$ continuous lineare form on $V$).} $$ % todo stimmt das hier? Schwer lesbar! 
+				$$\text{(Note: $l_h \in V' \Rightarrow \overline{l_h} \in$ continuous lineare form on $V$).} $$  
+				\begin{center}
+					\textit{\color{red} is tis correct? Hard to read!}
+				\end{center} % todo stimmt das hier? Schwer lesbar!
 				Define $u \coloneqq A^{-1} w \in V \Rightarrow a(u,v) = \langle A u, v \rangle_V = \langle w, v \rangle_V = \langle h, v \rangle_H$
 				$$ \Rightarrow u \in \DO{S}, ~Su = h $$
 				($V$ dense in $H$). $(+)$ implies that $S^{-1}$ is continuous.
@@ -476,7 +487,7 @@ and we assume that $V$ is dense in $H$.
 		\end{proof}
 \end{theorem}
 
-\chapter{Friedrichs extension}
+\chapter{Friedrichs Extension}
 
 \index{semi-bounded} \index{bounded!semi-}
 \begin{definition}
@@ -499,7 +510,10 @@ and we assume that $V$ is dense in $H$.
 					$\int_{\R^3} \left| \nabla u + \frac{1}{2} \frac{x}{|x|^2} u \right|^2 dx \geq 0$ 
 					$$ \iff \int_{\R^3} \left| \nabla u \right|^2 + \frac{1}{4} \frac{|u|^2}{|x|^2} dx \geq - \int_{\R^3} \langle \nabla u(x), \frac{x}{|x|} \rangle u(x) dx $$
 					now
-					$$ -2 \int_{\R^3} \langle \nabla u, \frac {|x|^2}{|x|^2} \rangle u dx = - \int_{\R^3} \langle \nabla |u|^2, \frac{x}{|x|^2} dx = \int_{\R^3} |u|^2 \underbrace{\operatorname{div} \frac{x}{|x|^2}}_{= \frac{1}{|x|^2}} = \int_{\R^3} \frac{|u|^2}{|x|^2} dx $$ % todo hier stimmt doch was nicht
+					$$ -2 \int_{\R^3} \langle \nabla u, \frac {|x|^2}{|x|^2} \rangle u dx = - \int_{\R^3} \langle \nabla |u|^2, \frac{x}{|x|^2} dx = \int_{\R^3} |u|^2 \underbrace{\operatorname{div} \frac{x}{|x|^2}}_{= \frac{1}{|x|^2}} = \int_{\R^3} \frac{|u|^2}{|x|^2} dx $$ 
+				\begin{center}
+					\textit{\color{red} is tis correct? Hard to read!}
+				\end{center} % todo hier stimmt doch was nicht
 					$\Rightarrow \int |\nabla u|^2 \geq \frac{1}{4} \int \frac{|u|^2}{|x|^2}$. Now
 					$$ \int_{\R^3} \frac{1}{r} |u(x)|^2 dx \leq \left( \int \frac{|u(x)|^2}{r^2} dx \right)^{\frac{1}{2}} \cdot \| u \|_L^2 $$
 					$\int_{\R^3} \frac{1}{r^2} |u(x)|^2 dx \leq 4 \langle - \Delta u, u \rangle_L^2$
@@ -539,8 +553,11 @@ and we assume that $V$ is dense in $H$.
 		$$ \left| a_0(x_n, x_m) - \alpha^2 \right| < \epsilon $$
 		$\epsilon = \frac{\alpha^2}{2} \Rightarrow |a_0(x_n, x_m) | = \left| \langle T_0 x_n, x_m \rangle \right| \geq \frac{1}{2} \alpha^2 > 0 ~\forall n, m \geq N$. Let $m \rightarrow \infty \Rightarrow x_m \rightarrow 0$, which leads to the contradiction.
 	\end{proof}
-\end{lemma} % todo page 13!??!? skipped that completely
+\end{lemma} % 
 
+				\begin{center}
+					\textit{\color{red} page 13 hard to read AND understand structure! skipped that completely}
+				\end{center} % todo page 13!??!? skipped that completely
 \begin{theorem}[Example: Dirichlet Realisation]
 	Let $\Omega \subseteq \R^n$ be a bounded domain, $\partial \Omega$ smooth, $T_1$ is defined by:
 	$$ \DO{T_1} = W^{2,2}(\Omega) \cap W_{0}^{1,2}(\Omega), ~ T_1 = - \Delta \colon \DO{T_1} \rightarrow L^2(\Omega) $$
@@ -570,7 +587,7 @@ and we assume that $V$ is dense in $H$.
 		\item Schrödinger operator with a Coulomb potential ~\\
 			Define $\DO{T_{0}} \coloneqq C_c^\infty(\R^3), ~ T_0 = - \Delta - \frac{1}{r}, ~ H = L^2(\R^3)$. We saw that $T_0$ is semi-bounded: $\langle T_0 u, u \rangle_{L^2} \geq - \| u \|_{L^2}^2$
 			$$\tilde{T_0} \coloneqq T_0 + 2 \cdot \mathds{1}_H, ~ \DO{\tilde{T_0}} = \DO{T_0}$$ 
-			satisfies the assumptions of the Friedrichs extension. Completion $V$ of $C_c^{\infty}$ in $L^2$ with respect to the norm % todo is it really a 2
+			satisfies the assumptions of the Friedrichs extension. Completion $V$ of $C_c^{\infty}$ in $L^2$ with respect to the norm
 			$$ u \mapsto \left( \langle \nabla u, \nabla u \rangle_{L^2} + \int_{\R^3} \left( 2 - \frac{1}{r} \right) |u(x)|^2 dx \right)^\frac{1}{2} = \sqrt{ \langle \tilde{T_0} u, u \rangle_{L^2}} $$
 			is $V = W^{1,2}(\R^3)$.
 			
@@ -653,6 +670,305 @@ Let $X$ be a Banach space and $H$ a Hilbert space.
 	\end{proof}
 \end{theorem}
 
+\begin{theorem}[Properties of the resolvent] ~\
+	\begin{enumerate}[label=(\roman*\upshape)]
+		\item For $\lambda_0 \in \rho(T)$, $\lambda \in \C$ with $\left| \lambda_0 - \lambda \right| < \frac{1}{\left\| R(\lambda_0, T) \right\|_{L(X)}}$, we have
+			$$ R(\lambda, T) = \sum_{n=0}^\infty R(\lambda_0, T)^{n+1} \left( \lambda_0 - \lambda \right)^n $$
+			and $\lambda \in \rho(T)$, i.e. $R(\cdot, T)$ is locally holomorphic, $\rho(T)$ is open, $\sigma(T)$ is closed.
+		\item Resolvent equation
+			$$ R(\lambda, T) - R(\mu, T) = \left( \mu - \lambda \right) R(\lambda, T) R(\mu, T) \quad \forall \lambda, \mu \in \rho(T) $$
+			Note $\frac{1}{\lambda - T} - \frac{1}{\mu - T} = \frac{(\mu - T) - (\lambda - T)}{(\lambda - T)(\mu - T)} = \frac{(\mu - \lambda)}{(\lambda - T)(\mu - T)}$
+		\item $R(\lambda, T) R(\mu, T) = R(\mu, T) R(\lambda, T) ~\forall \mu, \lambda \in \rho(T)$.
+		\item $\frac{\partial}{\partial \lambda} R(\lambda, T) = - R(\lambda, T)^2 ~\forall \lambda \in \rho(T)$
+		\item $T R(\lambda, T) = R(\lambda, T) T ~ \forall \lambda \in \rho(T)$
+	\end{enumerate}
+	
+	\begin{proof} ~\
+		\begin{enumerate}[label=(\roman*\upshape)]
+			\item $\lambda - T = \left( \lambda - \lambda_0 \right) + \left( \lambda_0 - T \right) = \left( \lambda_0 - T \right) \left[ \mathds{1}_X - \frac{\left( \lambda_0 - \lambda \right)}{\left( \lambda - \lambda_0 \right)} R(\lambda_0, T) \right]$. ~\\
+				Define $S \coloneqq \left( \lambda_0 - \lambda \right) R(\lambda_0, T) \in L(X)$ with $\|S \|_{L(X)} < 1$. By Neumann series:
+				$$ R(\lambda, T) = \left( \mathds{1}_X - S \right)^{-1} R(\lambda_0, T) = \left( \sum_{n=0}^{\infty} S^n \right) R(\lambda_0, T) = \sum_{n=0}^\infty R(\lambda_0, T)^{n+1} \left( \lambda_0 - \lambda \right)^n $$
+				and $\lambda \in \rho(T)$.
+			\item $R(\lambda, T) - R(\mu, T) = R(\lambda, T) \left[ \mathds{1}_X - \left( \lambda - T \right) R(\mu, T) \right]$
+				\begin{align*}
+					 & = R(\lambda, T) \left[ \left( \mu - T \right) - \left( \mu - T \right) \right] R(\mu, T) ~\hspace{1.3cm} \\
+					& = (\mu - \lambda) R(\lambda, T) R(\mu, T)
+				\end{align*}
+			\item $R(\lambda, T) R(\mu, T) \overset{(ii)}{=} \frac{R(\lambda, T) - R(\mu, T)}{\mu - \lambda} = \frac{R(\mu, T) - R(\lambda, T)}{\lambda - \mu} \overset{(ii)}{=} R(\mu, T) R(\lambda, T)$
+			\item $\lim_{\mu \rightarrow \lambda} \frac{R(\mu; T) - R(\lambda, T)}{\mu - \lambda} \overset{(ii)}{=} \lim_{\mu \rightarrow \lambda} \frac{\left( \lambda - \mu \right) R(\mu, T) R(\lambda, T)}{\left( \mu - \lambda \right)} = - R(\lambda, T)^2$
+			\item $T R(\lambda, T) - R(\lambda, T) T = \left( T - R(\lambda, T) T(\lambda - T) \right) R(\lambda, T) $
+				$$ \hspace{1.5cm} = R(\lambda, T) \underbrace{\left( \left( \lambda - T \right) T - T \left( \lambda - T \right) \right)}_{= 0} R(\lambda, T) = 0$$
+		\end{enumerate}
+	\end{proof}
+\end{theorem}
+
+Next, we look at some basic examples:
+
+\index{essential range}
+\begin{definition}[essential range, dt. wesentlicher Bildbereich]
+	Let $(\Omega, \mathcal{A}, \mu)$ be a measure space $f \colon \Omega \rightarrow \C$ measurable. Define the essential range of $f$ as:
+	$$ \operatorname{essrange}(f) \coloneqq \big\{ \lambda \in \C ~|~\mu\left( \left\{ x \in \Omega \colon ~|\lambda - f(x)| < \epsilon \right\} \right) > 0 ~\forall \epsilon > 0 \big\} $$ 
+\end{definition}
+
+\begin{theorem}[Example: Spectrum of the multiplication operator]
+	Let $f \in L_{loc}^\infty(\R^n)$, $M_d$ be the multiplication operator in $L^2(\R^n)$, i.e.
+	$$ \DO{M_f} = \big\{ u \in L^2(\R^n) : fu \in L^2(\R^n) \}, ~M_f u = fu $$
+	Then there holds:
+	\begin{enumerate}[label=(\roman*\upshape)]
+		\item $\sigma(M_f) = \operatorname{essrange}(f)$
+		\item $\sigma_p(M_f) = \big\{ \lambda \in \C ~|~ \mathcal{L}^d \left( \{ x ~|~f(x) = \lambda \} \right) > 0 \big\}$
+	\end{enumerate}
+	
+	\begin{proof} ~\
+	  \begin{enumerate}[label=(\roman*\upshape)]
+		\item \begin{description}
+			\item[\enquote{$\subseteq$}] $\lambda \notin \operatorname{essrange}(f)$, i.e. $\exists c > 0$ s.t. $|\lambda - f(x)| \geq c$ for a.e. $x \in \R^n$.
+				$$ \Rightarrow g \coloneqq \frac{1}{\lambda - f} \in L^\infty(\R^n) \Rightarrow gu \in L^2 ~\forall u \in L^2 $$
+				$ \Rightarrow M_g \in L(L^2)$ with
+				\begin{align*}
+					M_g(\lambda - M_f) u(x) & = \frac{1}{\mu - f(x)} \left( \lambda - f(x) \right) u(x) \\
+					&= u(x) = \left( \lambda - M_f \right) M_g u(x) \quad \forall u \in \DO{M_f} 
+				\end{align*}
+				i.e. $\lambda \in \rho(M_f)$ with $R(\lambda, M_f) = M_g$.
+			\item[\enquote{$\supseteq$}] $A \in \operatorname{essrange}(f)$, we denote for any $m \in \N$:
+					$$ \tilde{S_m} \coloneqq \big\{ x \in \R^n \colon ~ |\lambda - f(x)| < 2^{-m} \big\}. $$
+				Choose $S_m \subseteq \tilde{S_m}$ s.t. $\mathcal{L}^d(S_m) \in (0, \infty)$; define
+					$$ \phi_m(x) \coloneqq \begin{cases} 1, & x \in S_m \\ 0, & x \notin S_m \end{cases} $$
+				Then
+					\begin{align*}
+						\left\| \left( \lambda - M_f \right) \phi_m \right\|^2_{L^2} & = \int_{S_m} \left| \lambda - f(x) \right|^2 \left| \phi_m(x) \right|^2 dx \\
+							& \leq 2^{-2m} \| \phi_m\|_{L^2}^2 \quad \forall m \in \N
+					\end{align*}
+				$\Rightarrow$ If $\lambda \in \rho(M_f)$, but then
+				$$ \left\| \left( \lambda - M_f \right)^{-1} \right\|_{L(L^2)} \geq \frac{\left\| \left( \lambda - M_f \right)^{-1} \left( \lambda - M_f \right) \phi_m \right\|_{L^2}}{\left\| \left( \lambda - M_f \right) \phi_m \right\|_{L^2}} \geq 2^{2m} \quad \forall m \in \N $$
+				$\Rightarrow \lambda \in \sigma(M_f)$.
+		   \end{description}
+		\item \begin{description}
+			\item[\enquote{$\Rightarrow$}] $\lambda \in \sigma_p(M_f) \iff \exists \phi \in L^2 \setminus \{ 0 \}$ s.t. $\left( \lambda - f(x) \right) \phi(x) = 0$ for a.e. $x$, i.e. $\phi = 0$ a.e. on $\{ y \in \R^d ~|~ f(y) \neq \lambda \}$, and therefore
+				$$ \sigma_p(M_f) = \emptyset \iff L^d \left( \{ x ~|~f(x) = \lambda \} \right) = 0 $$
+			\item[\enquote{$\Leftarrow$}] $\lambda \in \C$ s.t. $\mathcal{L}^d \left( \{ x ~|~f(x) = \lambda \} \right) > 0$. Take $S \subseteq \{ x ~|~f(x) = \lambda \}$ with $\mathcal{L}^d(s) \in (0, \infty)$, define
+				$$ \phi_S(x) \coloneqq \begin{cases} 1, & x \in S \\ 0, & x \notin S \end{cases} $$
+				Then:
+					$$ f(x) \phi(x) = \lambda \phi(x) \text{ for a.e. } x \in \R^n $$
+				$\Rightarrow \phi$ is Eigenfunction to the Eigenvalue $\lambda \Rightarrow \lambda \in \sigma_p(M_f)$.
+		   \end{description}			
+	  \end{enumerate}
+	\end{proof}
+\end{theorem}
+
+\begin{example} ~\
+	\begin{enumerate}
+		\item ($\sigma(T) = \emptyset$) Setting: $H = L^2(0,1)$, $\DO{T} = \{ f \in W^{1,2}(0,1) ~|~ f(0) = 0 \}$, $Tf = f'$. ~\\
+			Claim: $\sigma(T) = \emptyset, \sigma(T) = \C$.
+			\begin{proof}
+				For $g \in L^2(0,1)$, $\lambda \in \C$ the equation $(\lambda - T) f = g$ has the unique solution
+				$$ f(x) = - \int_0^x e^{-\lambda(x-t)} g(t) dt, ~x \in (0, 1), f \in \DO{T} $$
+				since $f'(x) = \lambda \int_0^x e^{\lambda (x-t)} g(t) dt - g(t) = \lambda f(x)-g(x)$. For $\tilde{f} \in \DO{T}$ with $(\lambda - T) \tilde{f} = g$ we get
+				$$ \lambda(f - \tilde{f}) = \left(f - \tilde{f} \right)' \iff f - \tilde{f} = c e^{\lambda \cdot} \xRightarrow[]{\tilde{f}(0) = f(0)} c = 0 \Rightarrow f = \tilde{f} $$
+				So $\lambda \in \rho(T)$, since
+				\begin{align*}
+					\| f \|_{L^2}^2 & = \int_0^1 \left| - \int_0^x e^{-\lambda(x-t)} g(t) dt \right|^2 dx \\
+						& \leq \int_0^1 e^{2 |\lambda| x } \left| \int_0^1 |g(t)| dt \right|^2 dx \overset{Hölder}{\leq} \underbrace{\int_0^1 e^{2|\lambda|x} dx}_{< \infty} \| g \|_{L^2}^2
+				\end{align*}
+				$\Rightarrow \rho(T) = \C \Rightarrow \sigma(T) = \emptyset$.
+			\end{proof}
+		\item ($\sigma(T) = \C$) Setting: $H = L^2(0,1)$, $\DO{T} = W^{1,2}(0,1)$, $Tf = f'$. ~\\
+			Claim: $\sigma(T) = \C, \sigma(T) = \emptyset$.
+			\begin{proof}
+				For $\lambda \in \C$: $\phi_\lambda(x) \coloneqq e^{\lambda x}$, $x \in \R$. $\phi_\lambda \in \DO{T}$ with $T \phi_\lambda = \lambda \phi_\lambda$.
+					$$ \Rightarrow \sigma_p(T) = \C \Rightarrow \sigma(T) = \C, ~\rho(T) = \emptyset $$
+			\end{proof}
+	\end{enumerate}	
+\end{example}
+
+Following are going to be some basic facts on the spectra of self-adjoint operators.
+
+\begin{lemma}
+	Let $T$ be a closable operator in a Hilbert space $H$, $\lambda \in \C$, then
+	\begin{enumerate}
+		\item $\operatorname{kern} \left( \overline{\lambda} - T^* \right) = \operatorname{range} \left( \lambda - T \right)^\perp$
+		\item $\overline{\operatorname{range}(\lambda - T)} = \operatorname{kern} (\overline{\lambda} - T^*)^\perp$
+	\end{enumerate}
+	
+	\begin{proof} ~\
+		\begin{enumerate}
+			\item $\DO{T}$ is dense in $H$: 
+				\begin{align*}
+					f \in \operatorname{kern}(\overline{\lambda} - T^*) \iff & \langle g , \left( \overline{\lambda} - T^* \right) f \rangle_H = 0 \quad \forall g \in \DO{T} \\
+						\iff & \langle g , T^* f \rangle_H = \lambda \langle g, f \rangle \quad \forall g \in \DO{T} \\
+						\iff & \langle T g  f \rangle_H = \langle \lambda g, f \rangle \quad \forall g \in \DO{T} \\
+						\iff & \langle \left( \lambda - T \right) g , f \rangle = 0 \quad \forall g \in \DO{T} \\
+						\iff & f \in \operatorname{range}(\lambda - T)^\perp
+				\end{align*}
+			\item $\operatorname{kern} \left( \overline{\lambda} - T^* \right)^\perp = \left( \operatorname{range} \left( \lambda - T \right)^\perp \right)^\perp = \overline{ \operatorname{range} \left( \lambda - T \right)}$
+		\end{enumerate}
+	\end{proof}
+\end{lemma}
+
+\begin{theorem}[Spectrum of self-adjoint operator is real] \label[thm:iv.5]
+	Let $T$ be a self-adjoint operator on $H$, then $\sigma(T) \subseteq \R$ and for $\lambda \in \C \setminus \R$:
+		$$ \left\| R(\lambda, T) \right\|_{L(H)} \leq \frac{1}{\left| \operatorname{Im}(\lambda) \right|} $$	
+		
+	\begin{proof}
+		Let $\lambda \in \C \setminus \R$, $u \in \DO{T}$:
+		$$ \langle (\lambda - T) u, u \rangle = \lambda \langle u, u \rangle - \langle T u, u \rangle = \operatorname{Re}(\lambda) \langle u, u \rangle + i \operatorname{Im}(\lambda) \langle  u, u \rangle - \langle Tu, u \rangle, $$	
+		$\langle T u, u \rangle = \langle u, T^* u \rangle \overset{T ~ s.a.}{=} \overline{\langle u, Tu \rangle} \Rightarrow \langle Tu, u \rangle \in \R$
+			$$ \Rightarrow \left| \operatorname{Im}(\lambda) \right| \| u \|_H^2 \leq \left| \langle \left( \lambda - T \right) u, u \rangle \right| \overset{C.S.}{\leq} \left\| \left( \lambda - T \right) u \right\|_H \left\| u \right\|_H  $$
+			\begin{align}
+				\Rightarrow \left| \operatorname{Im}(\lambda) \right| \leq \left\| \left( \lambda - T \right) u \right\|_H \tag*{$(*)$},
+			\end{align} 
+			$\operatorname{kern}(\lambda - T) = \{ 0 \}$ and $\operatorname{range}(\lambda - T)$ is closed, since for $u \in \overline{\operatorname{range}(\lambda - T)}$, $(u_n)_n \subseteq \DO{T}$ s.t. $(\lambda - T) u_n \rightarrow u$ in $H$.
+			$$ \Rightarrow \left( (\lambda - T) u_n \right)_n \text{ Cauchy in } H \xRightarrow[]{(*)} (u_n)_n \text{ Cauchy in } H $$
+			$$ \xRightarrow[complete]{H} \exists u \in H \text{ s.t. } u_n \rightarrow u \text{ in } H \xRightarrow[closed]{\lambda - T} u \in \DO{T} with \left( \lambda - T \right) u = v. $$
+			$$ \Rightarrow v \in \operatorname{range} \left( \lambda - T \right) $$
+			$$ \xRightarrow[]{Lem. IV.1(ii)} \operatorname{range}(\lambda - T) = \{ 0 \}^\perp = H $$
+			$\Rightarrow \lambda \in \rho(T), R(\lambda, T) \in L(H)$ with
+			$$ \| R(\lambda, T) \|_{L(H)} = \sup_{u \neq 0} \frac{\| R(\lambda, T) u \|_H}{\| \left( \lambda - T \right) R(\lambda, T) u \|_H} \overset{(*)}{\leq} \sup_{u \neq 0} \frac{\| R(\lambda, T) u \|}{\left| \operatorname{Im}(\lambda) \right| \| R(\lambda, T) u \|} = \frac{1}{\left| \operatorname{Im}(\lambda) \right|} $$
+	\end{proof}
+\end{theorem}
+
+\begin{lemma}[Spectrum of bounded operators]
+	Let $T \in L(X)$ then:
+		$$ \emptyset \neq \sigma(T) \subseteq \{ \lambda \in \C : |\lambda| \leq \| T \|_{L(X)} \}, $$
+	i.e. $\sigma(T)$ is compact.
+	
+	\begin{proof}
+		See a FA course.
+	\end{proof}
+\end{lemma}
+
+\begin{theorem}[Location of spectrum of self-adjoint bounded operators]
+	Let $T \in L(H)$ be self-adjoint. Denote
+	$$ m \coloneqq m(T) \coloneqq \inf_{u \neq 0} \frac{\langle Tu, u \rangle}{\langle u, u \rangle}, ~ M \coloneqq M(T) \coloneqq \sup_{u \neq 0} \frac{\langle Tu, u \rangle}{\langle u, u \rangle} $$
+	Then $\sigma(T) \subseteq [m, M], \{ m, M \} \subseteq \sigma(T)$.
+	
+	\begin{proof}
+		By \hyperref[thm:iv.5]{Theorem IV.5}: $\sigma(T) \subseteq \R$. For $\lambda \in (M, \infty)$:
+		$$ \left| \langle \left( \lambda - T \right) u, u \rangle \right| = \lambda \langle u, u \rangle - \langle T u, u \rangle \geq \left( \lambda - M \right) \langle u, u \rangle $$
+	$\Rightarrow \left( \lambda - T \right)^{-1} \in L(H)$ by Lax-Milgram Theorem, $\lambda \in \rho(T)$. For $\lambda \in (-\infty, m)$: same way 
+	$$\Rightarrow \sigma(T) \subseteq [m, M]. $$
+		$M \in \sigma(T)$: obtain $(u, v) \mapsto \langle (M - T) u, v \rangle_H$ is an inner product. For $u,v \in H$ by C.S.-inequality
+		$$ \left| \langle \left( M - T \right) u, v \rangle \right|^2 \leq \langle \left( M - T \right) u, z \rangle \langle \left(M - T \right)v, v \rangle $$
+		$$ \Rightarrow \| \left( M - T \right) u \|_H^2 = \left| \sup_{\| v \| \leq 1} \langle \left(M-T\right)u,u\rangle \right| \langle \left(M - T\right)u, u \rangle = \left\| M - T \right\|_{L(H)} \langle \left(M - T \right) u, u \rangle $$
+		By assumption construct $(u_n)_n \subseteq H$ s.t. $\| u_n \| = 1$.
+		$$ \langle T u_n, u_n \rangle \rightarrow M $$
+		$\Rightarrow \left( M - T \right) u_n \rightarrow 0 \Rightarrow M \notin \rho(T) \Rightarrow M \in \sigma(T)$. For $m$ in the same way.
+	\end{proof}
+\end{theorem}
+
+\begin{lemma}
+	$T = T^* \in L(H, H$ and $\operatorname{spec}(T) = \{ 0 \} \Rightarrow 0$.
+	
+	\begin{proof}
+		Theorem IV.6 $\Rightarrow m = M = 0 \Rightarrow \langle Tx, x \rangle = 0 ~ \forall x \in H$
+		$$ \xRightarrow[Forumla]{{\color{red}What?}} \langle Tx, y \rangle = 0 ~\forall x, y \in H \Rightarrow T = 0 $$ % todo pouldecation formula? What  is written here
+	\end{proof}	
+\end{lemma}
+
+\begin{theorem}
+	The spectrum of a self-adjoint operator on a Hilbert space is a non-empty closed subset of $\R$.
+	
+	\begin{proof}
+		Assume $\operatorname{spec}(T) = \emptyset \Rightarrow T^{-1} \in L(H, H)$. Let $\lambda \in \C \setminus \{ 0 \}$.
+		$$ L_{\lambda} \coloneqq - \frac{T}{\lambda} \left( ZT - \frac{1}{\lambda} \right)^{-1} = - \frac{1}{\lambda} - \frac{1}{\lambda^2} \left( T - \frac{1}{\lambda} \right)^{-1} \in L(H, H), ~ L_{\lambda}^{-1} = \left( T^{-1} - \lambda \right) $$
+		$\Rightarrow \lambda \in \rho(T^{-1}) \Rightarrow \operatorname{spec}(T^{-1}) = \{ 0 \}$. $T^{-1}$ is self-adjoint by Theorem I.5 $\Rightarrow T^{-1} = 0$, which yields a contradiction.
+	\end{proof}
+\end{theorem}
+
+\chapter{The Spectral Theorem}
+
+Let $T$ be a self-adjoint operator on a Hilbert space $H$.
+
+\begin{statements} ~\
+		\begin{enumerate}[label=\arabic*\upshape)]
+			\item $T$ is unitarily equivalent to a multiplication operator on a suitable $L^2$-Space (Finite dimension: every self-adjoint $n \times n$-matrix is unitarily equivalent to a diagonal matrix, i.e. a multiplication operator on $L^2\left( \{1, \dotsc, n\} \right)$.
+			\item There exists a functional calculus for $T$, i.e. for all bounded Borell-functions $f$, $f(T)$ is defined and $f \mapsto f(T)$ is a homeomorphismus of the algebra of Borell-functions
+				$$ f \colon X \rightarrow Y, ~ X, Y \text{\color{red} cup?}~ VS \text{ s.t. } f^{-1}(U) \in B(X) ~\forall U \text{ open} $$ % todo unreadable
+				$$ \left( \text{Finite dimensions: } A = U \begin{pmatrix} \lambda_1 & ~ & ~ \\ ~ & \ddots & ~ \\ ~ & ~ & \lambda_n \end{pmatrix} U^{-1}, ~ f(A) \coloneqq U \begin{pmatrix} f(\lambda_1) & ~ & ~ \\ ~ & \ddots & ~ \\ ~ & ~ & f(\lambda_n) \end{pmatrix} U^{-1} \right) $$
+			\item $T$ has a spectral representation. There exists a \text{\color{red} projection?}-valued measure $P_T$ on $\sigma(T)$, s.t. % todo unreadable
+				$$ T = \int_{\sigma(T)} \lambda dP_T(\lambda) $$
+				$$ \text{(Finite dimension: } A = \sum_{j=1}^n \lambda_j P_j, ~ P_j \text{ projection onto Eigenspace)} $$
+				How to define $f(T)$? Polynomials: $f(x) = \sum_{j=0}^n c_j x^j$
+					$$ f(T) = \sum_{j=0}^n c_j T^j, ~ D(f(t)) = ? $$
+				Analytic $f(x) = \sum_{j=0}^\infty \frac{f^j(x_0)}{j!} (x - x_0)^j, ~ f(T) = \sum_{j=0}^\infty \frac{f^j(x_0)}{j!} (T - x_0)^j$ for $\| T - x_0 \| < \rho$
+				$$ f(x) = (x - z)^{-1}, ~z \in \C \setminus \R \quad f(T) = (T - z)^{-1} = \operatorname{Res}_T(z) $$
+		\end{enumerate}	
+\end{statements}
+
+
+\begin{unnamedtheorem*}[Cauchy integral Formula]
+	Let $f$ be holomorph.
+	$$ f(x_0) = \frac{i}{2 \pi} \int_\Gamma f(z) \left( x_0 - z \right)^{-1} dz = \frac{1}{2 \pi i} \int_{\Gamma} f(z) \left(z - x_0 \right)^{-1} dz $$
+	$w = f(z) \left( z_0 - z \right)^{-1} dz$, $\C = \R^2$
+	\begin{align*}
+		z = x + i y, & \overline{z} = x - iy \\
+		dz = dx + i dy, & d\overline{z} = dx - i dy
+	\end{align*}
+	$\partial_z = \frac{1}{2} \left( \partial_x - i \partial_y \right)$, $\partial_{\overline{z}} = \frac{1}{2} \left( \partial_x + i \partial_y \right)$
+	\begin{align*}
+		dw & = \frac{\partial w}{\partial z} \underbrace{dz \wedge dz}_{=0} + \frac{\partial w}{\partial \overline{z}} d\overline{z} \wedge dz \\
+			& = \left( \partial_{\overline{z}} f(z) \right) \left(z_0 - z \right)^{-1} 2i dx \wedge dy
+	\end{align*}
+	$M \subset \C$ compact with smooth boundary $\Gamma$ and $B_\delta(z_0) \subseteq \overset{\circ}{M} \hookrightarrow M \setminus B_{\delta}(z_0)$
+	$$ \int_{\partial \left( \Gamma \setminus B_{\delta(z_0)} \right)} w = \int_{\partial \Gamma} w - \int_{\partial B_{\delta}(z_0)} w = \int_{\Gamma \setminus B_{\delta}(z_0)} dw $$
+	If $f$ is continuous at $z_0$, then
+	\begin{align*}
+		\lim_{\delta \rightarrow 0} \int_{\partial B_{\delta}(z_0)} w & = \lim_{\delta \rightarrow 0} \int_{\partial B_\delta(z_0)} \frac{f(z)}{z_0 - z} \\
+			& = \lim_{\delta \rightarrow 0} \int_0^{2 \pi} \frac{f(z_0 + \delta e^{it}}{-\delta e^{it}} i \delta e^{it} dt \\
+			& = - 2 \pi i f(z_0)
+		\end{align*}
+	$$ \lim_{\delta \rightarrow 0} \int_{\Gamma \setminus B_{\delta(z_0)}} \frac{\partial f}{\partial \overline{z}} \left( z_0 - z \right)^{-1} 2 i dx \wedge dy = 2i \int_{\Gamma} \frac{\partial f}{\partial \overline{z}} \left( z_0 - z \right)^{-1} dx \wedge dy $$
+		$$ \Rightarrow f(z_0) = - \frac{1}{2 \pi i} \int_{\partial \Gamma} w + \frac{1}{\pi} \int_{\Gamma} \frac{\partial f}{\partial \overline{z}}(z) \left( z_0 - z \right)^{-1} dx \wedge dy $$
+	If $f = 0$ on $\partial \Gamma$ then
+		$$ f(z_0) = \frac{1}{\pi} \int_{\Gamma} \frac{\partial f}{\partial \overline{z}}(z) \left( z_0 - z \right)^{-1} dx \wedge dy $$
+	($f \colon \C \rightarrow \C$ \text{\color{red}for} as $f \colon \R \rightarrow \C$). Now $\Gamma = \C$ % todo for?
+	$$ f(T) = \frac{1}{\pi} \int_{\C} \frac{2f}{2 \overline{z}}(z) \left( T - z \right)^{-1} dx \wedge dy $$
+	However, there 2 Problems:
+	\begin{enumerate}[label=\arabic*\upshape)]
+		\item maybe $f \colon \R \rightarrow \C$
+		\item $\operatorname{spec}(T) \subset \C$
+	\end{enumerate}
+\end{unnamedtheorem*}
+
+\index{almost analytic extension}
+\begin{definition}
+	Let $\tau \in C_c^\infty(\R)$ with $\operatorname{spec}(T(\tau)) \subset [-2, 2]$, $\tau |_{[-1, 1]} \equiv 1$. % todo is it really spec
+		$$ \sigma(x, y) \coloneqq \tau \left( \frac{y}{\langle x \rangle} \right), ~\langle x \rangle \coloneqq \left( 1 + x^2 \right)^{\frac{1}{2}} $$
+	For $f \in C^{\infty}(\R)$ and $n \geq 1$ we define the $n$-th \textbf{almost analytic extension} $\tilde{f}_n \colon \C \rightarrow \C$ by
+		$$ \tilde{f}_n(z) \colon \sigma(x, y) \sum_{j=0}^n \frac{f^{j}(x)}{j!} \left(iy \right)^j $$
+	\text{\color{red}Ruh}: % todo not readable
+		\begin{align}
+				\frac{\partial \tilde{f}}{\partial \overline{z}} (z) & = \frac{1}{2} \left( \partial_x - \frac{1}{i} \partial_y \right) \tilde{f}_n(x, y) \\
+				& = \frac{1}{2} \left( \sum_{j=0}^{n} \frac{f^{(j+1)}(x)}{j!} \left(iy \right)^j - \sum_{j=1}^{n} \frac{f^{(j)}(x)}{(j-1)!} \left( i y \right)^{i-1} \right) \sigma(x,y)  + \frac{1}{2} \sum \dotsc \left( \partial_x \sigma + i \partial_y \sigma \right) \\
+				& = \frac{1}{2} \frac{f^{(n+1)}(x)}{n!}	\left( iy \right)^n \sigma(x,y) + \dotsc
+		\end{align}
+		$\sigma \equiv 1$ on a strip of size $\langle x \rangle$ around $\R$
+		$$ \Rightarrow \left| \frac{\partial \tilde{f}_n(z)}{\partial \overline{z}} \right| = \mathcal{O} \left( \left| y \right|^n \right) \text{ for } y \rightarrow 0 $$
+\end{definition}
+
+\begin{definition}
+	Let $T = T^*$ be a map which associates to every element $f \colon \R \rightarrow \C$ of a subalgebra $\mathcal{E}$ of the Borelfunctions $\mathcal{B}(\R)$ an operator $f(T) \in L(H, H)$ is called functional calculus for $T$ if
+	\begin{enumerate}[label=\roman*\upshape)]
+		\item $f \mapsto f(T)$ is an algebra homomorphism
+			$$ \left( f + \alpha g \right)(T) = f(T) + \alpha g(T), ~ \left(f \cdot g \right) (T) = f(T) \cdot g(T) \quad \forall f,g \in \mathcal{E} $$
+		\item $f(T)^* = \overline{f}(T)$
+		\item $\| f(T) \| \leq \| f \|_{L^\infty}$
+		\item For $z \in \C \setminus \R$ and $r_z(x) = (x - z)^{-1}$ is 
+			$$ r_z(T) = \operatorname{Res}_T(z) $$
+		\item If $f \in C_c^\infty(\R)$ \text{\color{red}vandities} on $\operatorname{spec}(T)$, i.e.
+			$$ \operatorname{sp} T(f) \cap \operatorname{spec}(T) = \emptyset, \text{\color{red} then } f(t) = 0  $$ % todo was ist sp? and then?
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}
+	For $\beta \in \R$ let 
+	$$ S^\beta \coloneqq \big\{ f \in C^\infty(\R): ~\forall n \in \N_0 ~\exists c_n < \infty \text{ s.t. } \left| f^{(n)}(x) \right| \leq c_n \langle x \rangle^{\beta - n } ~\forall x \in \R \big\} $$
+	$\mathcal{A} \coloneqq \bigcup_{\beta < 0} S^\beta$
+		$$ \| f \|_n \coloneqq \sum_{j=0}^{n} \int_{-\infty}^\infty \underbrace{\left| f^{(j)}(x) \right| \langle x \rangle^{j-1}}_{\sim \langle x \rangle^{\beta - 1} $$
+		well-defined
+\end{definition}
+
+
 \appendix
 
 \chapter*{Addendum}
@@ -667,8 +983,12 @@ Let $H$ be a Hilbert space, and let $H'$ denote its dual space, consisting of al
 	 If $X$ and $Y$ are Banach spaces, and $T \colon X \rightarrow Y$ is a linear operator, then $T$ is continuous if and only if its graph is closed in $X \times Y$, with respect to the product topology.
 \end{theorem*}
 
+\begin{definition*}[Isometric]
+	Let $X$ and $Y$ be metric spaces with metrics $d_X$ and $d_Y$. A map $f \colon X \rightarrow Y$ is called an isometry or distance preserving if for any $a,b \in X$ one has
+		$$ d_Y \left( f(a), f(b) \right) = d_X\left(a, b\right). $$
 
-% Exercises - End 
+	$X$ and $Y$ are called isometric if there is a bijective isometry from $X$ to $Y$. 
+\end{definition*}
 
 % Index									
 \renewcommand{\indexname}{Stichwortverzeichnis}

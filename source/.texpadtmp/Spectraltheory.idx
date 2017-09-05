@@ -13,6 +13,9 @@
 \indexentry{Operator!closable|hyperpage}{4}
 \indexentry{closure|hyperpage}{4}
 \indexentry{Operator!closure of|hyperpage}{4}
+\indexentry{adjoint|hyperpage}{5}
+\indexentry{symmetric|hyperpage}{7}
+\indexentry{self-adjoint|hyperpage}{8}
 \indexentry{coercive|hyperpage}{9}
 \indexentry{semi-bounded|hyperpage}{13}
 \indexentry{bounded!semi-|hyperpage}{13}
@@ -24,3 +27,5 @@
 \indexentry{spectrum!continuous|hyperpage}{18}
 \indexentry{spectrum!residual|hyperpage}{18}
 \indexentry{resolvent function|hyperpage}{18}
+\indexentry{essential range|hyperpage}{20}
+\indexentry{almost analytic extension|hyperpage}{28}

@@ -1,5 +1,9 @@
 \begin{theindex}
 
+  \item adjoint, \hyperpage{5}
+
+  \indexspace
+
   \item bounded, \hyperpage{3}
     \subitem semi-, \hyperpage{13}
 
@@ -14,6 +18,10 @@
 
   \item dense, \hyperpage{3}
   \item domain, \hyperpage{2}
+
+  \indexspace
+
+  \item essential range, \hyperpage{20}
 
   \indexspace
 
@@ -47,10 +55,12 @@
 
   \indexspace
 
+  \item self-adjoint, \hyperpage{8}
   \item semi-bounded, \hyperpage{13}
   \item spectrum, \hyperpage{18}
     \subitem continuous, \hyperpage{18}
     \subitem point, \hyperpage{18}
     \subitem residual, \hyperpage{18}
+  \item symmetric, \hyperpage{7}
 
 \end{theindex}

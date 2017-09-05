@@ -1,6 +1,7 @@
 \select@language {english}
 \activateonlyattoc 
-\contentsline {chapter}{\numberline {I}Unbounded, adjoint and self-adjoint operators}{2}{chapter.1}
+\contentsline {chapter}{\numberline {I}Unbounded, adjoint and self-adjoint Operators}{2}{chapter.1}
 \contentsline {chapter}{\numberline {II}Representation Theorems}{9}{chapter.2}
-\contentsline {chapter}{\numberline {III}Friedrichs extension}{13}{chapter.3}
+\contentsline {chapter}{\numberline {III}Friedrichs Extension}{13}{chapter.3}
 \contentsline {chapter}{\numberline {IV}Spectrum and Resolvent}{18}{chapter.4}
+\contentsline {chapter}{\numberline {V}The Spectral Theorem}{26}{chapter.5}
